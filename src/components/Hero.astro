@@ -1,0 +1,91 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+
+<section class="hero-section" id="inicio">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1 class="hero-title">
+      <span class="d-block">CIArte</span>
+      <span class="d-block text-accent">El Laberinto</span>
+    </h1>
+    <p class="hero-subtitle">
+      Espacio de arte comunitario y encuentro para todas las edades en General Güemes.
+    </p>
+    <div class="hero-actions">
+      <a href="#talleres" class="btn btn-primary">Ver Talleres</a>
+      <WhatsAppButton message="Hola, quiero conocer más sobre CIArte." />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    height: 90vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    margin-top: -80px; /* Counteract header height */
+    padding-top: 80px;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(139, 69, 19, 0.4), /* Tono tierra cálido */
+      rgba(0, 0, 0, 0.8)
+    );
+    mix-blend-mode: multiply;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .d-block {
+    display: block;
+  }
+
+  .text-accent {
+    color: var(--color-accent-400);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.125rem, 4vw, 1.5rem);
+    margin-bottom: var(--space-8);
+    color: var(--color-neutral-100);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+</style>

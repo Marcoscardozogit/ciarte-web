@@ -1,0 +1,241 @@
+---
+import siteSettings from '../content/settings/site.json';
+import WhatsAppButton from './WhatsAppButton.astro';
+
+const navItems = [
+  { label: 'El Espacio', href: '#inicio' },
+  { label: 'Comunidad', href: '#comunidad' },
+  { label: 'Talleres', href: '#talleres' },
+  { label: 'Agenda', href: '#agenda' },
+  { label: 'Galería', href: '#galeria' },
+  { label: 'Contacto', href: '#contacto' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-container">
+    <div class="logo">
+      <a href="/">
+        <span class="logo-text">CIArte</span>
+        <span class="logo-sub">El Laberinto</span>
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        {navItems.map(item => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <WhatsAppButton className="btn-sm" message="Hola, quiero información sobre las actividades." />
+      
+      <button class="menu-toggle" aria-label="Abrir menú" aria-controls="mobile-menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu hidden">
+    <div class="container">
+      <nav>
+        <ul>
+          {navItems.map(item => (
+            <li><a href={item.href} class="mobile-link">{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle logic
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const isExpanded = !mobileMenu.classList.contains('hidden');
+      menuToggle.setAttribute('aria-expanded', isExpanded.toString());
+    });
+
+    // Close mobile menu when clicking a link
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Sticky header logic
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-sticky);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid transparent; /* Reducido a 2px para eliminar borde grueso */
+    transition: all var(--transition-normal);
+  }
+
+  .site-header.scrolled {
+    box-shadow: var(--shadow-sm);
+    border-bottom-color: var(--color-neutral-200);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    transition: height var(--transition-normal);
+  }
+
+  .site-header.scrolled .header-container {
+    height: 64px;
+  }
+
+  .logo a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .logo-text {
+    font-family: var(--font-family-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-primary-600);
+    letter-spacing: -0.02em;
+  }
+
+  .logo-sub {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .main-nav ul {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .main-nav a {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    position: relative;
+    padding-block: var(--space-2);
+  }
+
+  .main-nav a:hover {
+    color: var(--color-primary-600);
+  }
+
+  .main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-500);
+    transition: width var(--transition-fast);
+  }
+
+  .main-nav a:hover::after {
+    width: 100%;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .menu-toggle {
+    display: flex;
+    color: var(--color-text-primary);
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-neutral-200);
+    padding-block: var(--space-4);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+    transform-origin: top;
+  }
+
+  .mobile-menu.hidden {
+    display: none;
+  }
+
+  .mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: var(--space-3) 0;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-neutral-100);
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .btn-sm {
+    display: none;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (min-width: 1024px) {
+    .main-nav {
+      display: block;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .btn-sm {
+      display: inline-flex;
+    }
+  }
+</style>

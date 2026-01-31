@@ -1,0 +1,40 @@
+/**
+ * Configuración de Content Collections para CIArte
+ * Colecciones: talleres, comunidad
+ */
+import { z, defineCollection } from 'astro:content';
+
+// Colección de Talleres
+const talleresCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        titulo: z.string(),
+        descripcion: z.string(),
+        imagen: z.string().optional(),
+        horarios: z.string(),
+        edadNivel: z.string(),
+        docente: z.string().optional(),
+        activo: z.boolean().default(true),
+        orden: z.number().default(0),
+        galeria: z.array(z.string()).optional(),
+        isFlyer: z.boolean().default(false),
+    }),
+});
+
+// Colección de Actividades Comunitarias
+const comunidadCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        titulo: z.string(),
+        descripcion: z.string(),
+        imagen: z.string().optional(),
+        fecha: z.date().optional(),
+        tipo: z.enum(['encuentro', 'jornada', 'mural', 'celebracion', 'otro']).default('otro'),
+        destacado: z.boolean().default(false),
+    }),
+});
+
+export const collections = {
+    talleres: talleresCollection,
+    comunidad: comunidadCollection,
+};

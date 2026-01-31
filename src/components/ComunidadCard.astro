@@ -1,0 +1,123 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  actividad: CollectionEntry<"comunidad">;
+}
+
+const { actividad } = Astro.props;
+const { data, slug } = actividad;
+
+// Formatear fecha
+const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+}) : null;
+---
+
+<article class="card comunidad-card">
+  <div class="card-image">
+    {data.imagen ? (
+      <img src={data.imagen} alt={data.titulo} loading="lazy" />
+    ) : (
+      <div class={`placeholder-image type-${data.tipo}`}>
+        <span>{data.tipo}</span>
+      </div>
+    )}
+  </div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class={`badge type-${data.tipo}`}>{data.tipo}</span>
+      {fecha && <span class="date">{fecha}</span>}
+    </div>
+    <h3 class="card-title">{data.titulo}</h3>
+    <p class="card-description">{data.descripcion}</p>
+  </div>
+</article>
+
+<style>
+  .comunidad-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: var(--color-neutral-100);
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .comunidad-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary-100);
+    color: var(--color-secondary-800);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .placeholder-image.type-mural { background-color: var(--color-accent-100); color: var(--color-accent-800); }
+  .placeholder-image.type-celebracion { background-color: var(--color-primary-100); color: var(--color-primary-800); }
+
+  .card-content {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: var(--color-neutral-200);
+    color: var(--color-text-secondary);
+  }
+
+  .badge.type-encuentro { background-color: var(--color-secondary-100); color: var(--color-secondary-800); }
+  .badge.type-mural { background-color: var(--color-accent-100); color: var(--color-accent-800); }
+  .badge.type-celebracion { background-color: var(--color-primary-100); color: var(--color-primary-800); }
+  .badge.type-jornada { background-color: var(--color-neutral-200); color: var(--color-neutral-800); }
+
+  .date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .card-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+  }
+
+  .card-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+  }
+</style>
