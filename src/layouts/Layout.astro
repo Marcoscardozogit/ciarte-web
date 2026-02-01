@@ -2,6 +2,7 @@
 interface Props {
   title: string;
   description?: string;
+  navItems?: { label: string; href: string }[];
 }
 
 import '../styles/global.css';
@@ -10,7 +11,7 @@ import Footer from '../components/Footer.astro';
 import siteSettings from '../content/settings/site.json';
 import { ViewTransitions } from 'astro:transitions';
 
-const { title, description = "CIArte - Espacio de arte comunitario en General Güemes, coordinación El Laberinto Grupo de Teatro." } = Astro.props;
+const { title, description = "CIArte - Espacio de arte comunitario en General Güemes, coordinación El Laberinto Grupo de Teatro.", navItems } = Astro.props;
 
 // Meta tags imagenes
 const image = "/images/perfiluno.jpg"; // Placeholder
@@ -47,7 +48,7 @@ const image = "/images/perfiluno.jpg"; // Placeholder
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <Header />
+    <Header navItems={navItems} />
     <slot />
     <Footer />
 

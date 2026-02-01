@@ -6,15 +6,15 @@ import WhatsAppButton from './WhatsAppButton.astro';
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <h1 class="hero-title">
-      <span class="d-block">CIArte</span>
+      <span class="d-block text-white">CIArte</span>
       <span class="d-block text-accent">El Laberinto</span>
     </h1>
     <p class="hero-subtitle">
       Espacio de arte comunitario y encuentro para todas las edades en General Güemes.
     </p>
     <div class="hero-actions">
-      <a href="#talleres" class="btn btn-primary">Ver Talleres</a>
-      <WhatsAppButton message="Hola, quiero conocer más sobre CIArte." />
+      <a href="#agenda" class="btn btn-primary">Próximos Eventos</a>
+      <a href="#talleres" class="btn btn-secondary">Ver Talleres</a>
     </div>
   </div>
 </section>
@@ -28,12 +28,12 @@ import WhatsAppButton from './WhatsAppButton.astro';
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: url('/images/hero-bg.jpg');
+    background-image: url('/images/integrantes5.jpg');
     background-size: cover;
     background-position: center;
     color: white;
     margin-top: -80px; /* Counteract header height */
-    padding-top: 80px;
+    padding-top: 180px;
   }
 
   .hero-overlay {
@@ -44,10 +44,9 @@ import WhatsAppButton from './WhatsAppButton.astro';
     height: 100%;
     background: linear-gradient(
       to bottom,
-      rgba(139, 69, 19, 0.4), /* Tono tierra cálido */
-      rgba(0, 0, 0, 0.8)
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.9)
     );
-    mix-blend-mode: multiply;
     z-index: 1;
   }
 

@@ -2,14 +2,16 @@
 import siteSettings from '../content/settings/site.json';
 import WhatsAppButton from './WhatsAppButton.astro';
 
-const navItems = [
-  { label: 'El Espacio', href: '#inicio' },
-  { label: 'Comunidad', href: '#comunidad' },
-  { label: 'Talleres', href: '#talleres' },
-  { label: 'Agenda', href: '#agenda' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Contacto', href: '#contacto' },
+const defaultNavItems = [
+  { label: 'Inicio', href: '/#inicio' },
+  { label: 'Agenda', href: '/#agenda' },
+  { label: 'Talleres', href: '/#talleres' },
+  { label: 'Comunidad', href: '/#comunidad' },
+  { label: 'Galería', href: '/#galeria' },
+  { label: 'Contacto', href: '/#contacto' },
 ];
+
+const { navItems = defaultNavItems } = Astro.props;
 ---
 
 <header class="site-header">
@@ -30,7 +32,9 @@ const navItems = [
     </nav>
 
     <div class="header-actions">
+    <div class="header-btn-wrapper">
       <WhatsAppButton className="btn-sm" message="Hola, quiero información sobre las actividades." />
+    </div>
       
       <button class="menu-toggle" aria-label="Abrir menú" aria-controls="mobile-menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -53,36 +57,50 @@ const navItems = [
 </header>
 
 <script>
-  // Mobile menu toggle logic
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  function initMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      const isExpanded = !mobileMenu.classList.contains('hidden');
-      menuToggle.setAttribute('aria-expanded', isExpanded.toString());
-    });
-
-    // Close mobile menu when clicking a link
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    if (menuToggle && mobileMenu) {
+      // Clone element to remove old listeners (simple way to avoid duplicates on re-run)
+      const newMenuToggle = menuToggle.cloneNode(true);
+      menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+      
+      newMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const isExpanded = !mobileMenu.classList.contains('hidden');
+        newMenuToggle.setAttribute('aria-expanded', isExpanded.toString());
       });
-    });
+
+      // Close mobile menu when clicking a link
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          if (newMenuToggle) newMenuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Sticky header logic
+    const header = document.querySelector('.site-header');
+    const updateHeader = () => {
+       if (window.scrollY > 50) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    };
+    
+    window.removeEventListener('scroll', updateHeader); // Clean up if possible, but hard with anon functions
+    window.addEventListener('scroll', updateHeader);
   }
 
-  // Sticky header logic
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-  });
+  // Run on initial load
+  initMenu();
+
+  // Run on subsequent navigations
+  document.addEventListener('astro:page-load', initMenu);
 </script>
 
 <style>
@@ -92,15 +110,16 @@ const navItems = [
     left: 0;
     width: 100%;
     z-index: var(--z-sticky);
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid transparent; /* Reducido a 2px para eliminar borde grueso */
+    background-color: var(--color-neutral-900); /* Solid Dark (Stage Black) */
+    border-bottom: 1px solid var(--color-neutral-800);
     transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
   }
 
   .site-header.scrolled {
-    box-shadow: var(--shadow-sm);
-    border-bottom-color: var(--color-neutral-200);
+    padding-block: var(--space-2);
+    box-shadow: var(--shadow-md);
+    border-bottom-color: var(--color-primary-900);
   }
 
   .header-container {
@@ -126,8 +145,9 @@ const navItems = [
     font-family: var(--font-family-heading);
     font-weight: 800;
     font-size: 1.5rem;
-    color: var(--color-primary-600);
+    color: var(--color-primary-500); /* Red */
     letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
 
   .logo-sub {
@@ -149,13 +169,14 @@ const navItems = [
 
   .main-nav a {
     font-weight: 500;
-    color: var(--color-text-primary);
+    color: var(--color-text-primary); /* White */
     position: relative;
     padding-block: var(--space-2);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
   }
 
   .main-nav a:hover {
-    color: var(--color-primary-600);
+    color: var(--color-accent-400); /* Gold */
   }
 
   .main-nav a::after {
@@ -165,7 +186,7 @@ const navItems = [
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--color-primary-500);
+    background-color: var(--color-accent-400); /* Gold underline */
     transition: width var(--transition-fast);
   }
 
@@ -223,6 +244,27 @@ const navItems = [
     display: none;
     padding: var(--space-2) var(--space-4);
     font-size: var(--font-size-sm);
+  }
+
+  /* Mobile: Center WhatsApp button */
+  @media (max-width: 1023px) {
+    .header-actions {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .header-btn-wrapper {
+      display: none;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      right: var(--space-4);
+    }
+
+    .header-container {
+      position: relative;
+    }
   }
 
   @media (min-width: 1024px) {

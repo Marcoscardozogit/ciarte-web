@@ -13,26 +13,26 @@ export async function getStaticPaths() {
 
 const { taller } = Astro.props;
 const { Content } = await taller.render();
+
+const tallerNavItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Inscripción', href: '#inscripcion' },
+  { label: 'Docente', href: '#docente' },
+  { label: 'Galería', href: '#galeria' },
+];
 ---
 
-<Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.descripcion}>
+<Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.descripcion} navItems={tallerNavItems}>
   <article class="taller-detail">
     <header class="taller-header">
       <div class="container header-content">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Inicio</a>
-          <span class="separator">/</span>
-          <a href="/#talleres">Talleres</a>
-          <span class="separator">/</span>
-          <span class="current" aria-current="page">{taller.data.titulo}</span>
-        </nav>
         <h1 class="taller-title">{taller.data.titulo}</h1>
         <div class="taller-meta">
           <span class="badge">{taller.data.edadNivel}</span>
           <span class="badge secondary">{taller.data.horarios}</span>
         </div>
       </div>
-      <div class="header-bg" style={`background-image: url(${taller.data.imagen || '/images/default-taller.jpg'})`}></div>
+      <div class="header-bg" style={`background-image: url(${taller.data.flyer || taller.data.imagen || '/images/default-taller.jpg'})`}></div>
       <div class="header-overlay"></div>
     </header>
 
@@ -44,7 +44,7 @@ const { Content } = await taller.render();
           </div>
         </div>
 
-        <aside class="sidebar">
+        <aside class="sidebar" id="inscripcion">
           <div class="info-card">
             <h3>Detalles</h3>
             <ul class="info-list">
@@ -76,8 +76,27 @@ const { Content } = await taller.render();
         </aside>
       </div>
 
+      {taller.data.docente && (
+        <section class="docente-section" id="docente">
+          <h2 class="docente-title">Sobre el Docente</h2>
+          <div class="docente-card">
+             <div class="docente-avatar">
+                {taller.data.fotoDocente ? (
+                  <img src={taller.data.fotoDocente} alt={taller.data.docente} />
+                ) : (
+                  <span>{taller.data.docente.charAt(0)}</span>
+                )}
+             </div>
+             <div class="docente-info">
+               <h3>{taller.data.docente}</h3>
+               <p>{taller.data.bioDocente || "Profesional con amplia trayectoria y pasión por la enseñanza artística."}</p>
+             </div>
+          </div>
+        </section>
+      )}
+
       {taller.data.galeria && taller.data.galeria.length > 0 && (
-        <section class="taller-gallery">
+        <section class="taller-gallery" id="galeria">
           <h2 class="gallery-title">Galería del Taller</h2>
           <div class="gallery-grid">
             {taller.data.galeria.map(img => (
@@ -96,44 +115,33 @@ const { Content } = await taller.render();
 <style>
   .taller-header {
     position: relative;
-    padding-top: 160px;
+    padding-top: 280px;
     padding-bottom: 80px;
     color: white;
     text-align: center;
     margin-bottom: var(--space-8);
   }
 
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
+  .nav-back {
     margin-bottom: var(--space-4);
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
   }
 
-  .breadcrumb a {
+  .back-link {
+    display: inline-block;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
+    font-weight: 500;
     transition: color 0.2s;
+    background: rgba(0,0,0,0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(4px);
   }
 
-  .breadcrumb a:hover {
+  .back-link:hover {
     color: white;
-    text-decoration: underline;
-  }
-
-  .breadcrumb .separator {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .breadcrumb .current {
-    color: white;
-    font-weight: bold;
+    background: rgba(0,0,0,0.5);
   }
 
   .header-bg {
@@ -219,19 +227,22 @@ const { Content } = await taller.render();
   }
 
   .info-card {
-    background-color: var(--color-primary-50);
+    background-color: var(--color-surface); /* Dark background */
     padding: var(--space-6);
     border-radius: var(--radius-xl);
-    border: 1px solid var(--color-primary-100);
+    border: 1px solid var(--color-border);
     position: sticky;
     top: 100px;
+    box-shadow: var(--shadow-md);
   }
 
   .info-card h3 {
-    color: var(--color-primary-800);
+    color: var(--color-primary-500); /* Red Title */
     margin-bottom: var(--space-4);
-    border-bottom: 2px solid var(--color-primary-200);
+    border-bottom: 2px solid var(--color-primary-900);
     padding-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .info-list {
@@ -244,13 +255,25 @@ const { Content } = await taller.render();
   .info-list li {
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid var(--color-neutral-800);
+    padding-bottom: var(--space-2);
+  }
+  
+  .info-list li:last-child {
+    border-bottom: none;
   }
 
   .info-list strong {
-    color: var(--color-primary-700);
+    color: var(--color-accent-400); /* Gold Label */
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     margin-bottom: var(--space-1);
+    font-weight: bold;
+  }
+  
+  .info-list span {
+    color: var(--color-text-primary); /* White Text */
+    font-size: var(--font-size-lg);
   }
 
   .full-width {
@@ -266,7 +289,7 @@ const { Content } = await taller.render();
 
   .gallery-title {
     font-size: var(--font-size-2xl);
-    color: var(--color-primary-800);
+    color: var(--color-neutral-100);
     margin-bottom: var(--space-6);
     text-align: center;
   }
@@ -293,5 +316,62 @@ const { Content } = await taller.render();
 
   .gallery-item:hover img {
     transform: scale(1.05);
+  }
+
+  /* Sección Docente */
+  .docente-section {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-8);
+    background-color: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+  }
+
+  .docente-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary-500);
+    margin-bottom: var(--space-6);
+    border-bottom: 2px solid var(--color-primary-900);
+    padding-bottom: var(--space-2);
+    display: inline-block;
+  }
+
+  .docente-card {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .docente-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--color-primary-800);
+    color: var(--color-accent-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 2px solid var(--color-accent-400);
+  }
+
+  .docente-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .docente-info h3 {
+    color: white;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .docente-info p {
+    color: var(--color-neutral-300);
   }
 </style>

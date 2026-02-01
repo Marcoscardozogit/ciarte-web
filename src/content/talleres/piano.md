@@ -1,13 +1,17 @@
 ---
 titulo: "Piano"
 descripcion: "Iniciación al piano y teclados. Lectura musical, técnica y repertorio popular y clásico adaptado a cada alumno."
-imagen: "/images/taller-piano.jpg"
+imagen: "/images/clases-piano.png"
+flyer: "/images/clases-piano2.png"
 horarios: "Viernes 18:00"
 edadNivel: "Todas las edades"
 docente: "Profe de Piano"
 activo: true
 orden: 8
-isFlyer: true
+galeria:
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
 ---
 
 ## Clases de Piano

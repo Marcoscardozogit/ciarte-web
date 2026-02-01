@@ -13,15 +13,21 @@ const currentYear = new Date().getFullYear();
         <p class="description">
           Un proyecto de <strong>El Laberinto</strong> Grupo de Teatro Independiente en articulación con el Centro de Jubilados Los Olivos.
         </p>
+        <div class="footer-logos">
+          <img src="/images/ellaberintologonuevo.png" alt="Logo El Laberinto" class="partner-logo" />
+          <img src="/images/ciartelogonuevo-1.png" alt="Logo CIArte" class="partner-logo" />
+        </div>
       </div>
 
       <div class="footer-nav">
         <h4>Secciones</h4>
         <ul>
           <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#agenda">Agenda</a></li>
           <li><a href="#talleres">Talleres</a></li>
           <li><a href="#comunidad">Comunidad</a></li>
           <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
 
@@ -40,8 +46,13 @@ const currentYear = new Date().getFullYear();
         
         <div class="social-links">
           {siteSettings.facebook && (
-            <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+            <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook El Laberinto">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+          )}
+          {siteSettings.facebook2 && (
+            <a href={siteSettings.facebook2} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook CIArte">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
           )}
           {siteSettings.instagram && (
@@ -97,6 +108,24 @@ const currentYear = new Date().getFullYear();
   .footer-brand .description {
     max-width: 350px;
     line-height: var(--line-height-relaxed);
+  }
+
+  .footer-logos {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    align-items: center;
+  }
+
+  .partner-logo {
+    height: 120px;
+    width: auto;
+    opacity: 1;
+    transition: transform var(--transition-normal);
+  }
+
+  .partner-logo:hover {
+    transform: scale(1.05);
   }
 
   h4 {
@@ -160,9 +189,10 @@ const currentYear = new Date().getFullYear();
   }
 
   .social-icon:hover {
-    background-color: var(--color-primary-500);
+    background-color: var(--color-accent-400); /* Gold */
     transform: translateY(-4px) scale(1.1);
-    color: white;
+    color: var(--color-neutral-900); /* Dark icon on gold */
+    box-shadow: 0 0 15px var(--color-accent-500);
   }
 
   .footer-bottom {

@@ -1,13 +1,17 @@
 ---
 titulo: "Violín"
 descripcion: "Iniciación y perfeccionamiento en violín. Aprendé técnica, lectura musical e interpretación de repertorio popular y clásico."
-imagen: "/images/flyer-violin.jpg"
+imagen: "/images/clases-violin.png"
+flyer: "/images/clases-violin1.png"
 horarios: "Viernes 17:00"
 edadNivel: "A partir de 8 años"
 docente: "Profe de Violín"
 activo: true
 orden: 4
-isFlyer: true
+galeria:
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
 ---
 
 ## Taller de Violín

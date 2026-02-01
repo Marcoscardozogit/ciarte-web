@@ -8,7 +8,9 @@ import { getCollection } from 'astro:content';
 
 // Obtener datos
 const talleres = (await getCollection('talleres')).sort((a, b) => a.data.orden - b.data.orden);
-const comunidad = (await getCollection('comunidad')).filter(item => item.data.destacado);
+const comunidad = (await getCollection('comunidad'))
+  .filter(item => item.data.destacado)
+  .sort((a, b) => a.data.orden - b.data.orden);
 ---
 
 <Layout title="CIArte – El Laberinto | Espacio de Arte Comunitario">
@@ -16,7 +18,7 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
     <Hero />
 
     <!-- SECCIÓN QUÉ ES CIARTE -->
-    <section class="section about-section">
+    <section class="section about-section" id="ciarte">
       <div class="container">
         <div class="grid-2 about-grid">
           <div class="about-content">
@@ -27,7 +29,7 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
             <p>
               CIArte (Centro de Integración y Arte) funciona en el corazón del Centro de Jubilados Los Olivos. 
               Es coordinado por <strong class="text-primary">El Laberinto Grupo de Teatro Independiente</strong>, 
-              con una visión clara: el arte es un derecho y una herramienta de transformación social.
+              con 19 años de trayectoria y una visión clara: el arte es un derecho y una herramienta de transformación social.
             </p>
             <p>
               Aquí no solo enseñamos disciplinas artísticas; construimos comunidad, 
@@ -40,6 +42,61 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
         </div>
       </div>
     </section>
+
+    <!-- SECCIÓN AGENDA -->
+    <section class="section bg-dark text-white" id="agenda">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title text-accent">Agenda Cultural</h2>
+          <p class="section-subtitle text-white-50">
+            Próximos eventos, funciones y muestras. ¡Agendalo!
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card agenda-card">
+            <div class="card-image">
+              <img src="/images/flayer-invitado.jpg" alt="Evento Especial con Invitado" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <h3 class="card-title text-accent">Visita Especial</h3>
+              <p>Un encuentro único con referentes de la cultura.</p>
+              <div style="text-align: center; margin-top: auto;">
+                <a href="https://wa.me/543874535157?text=Hola, quiero reservar entrada para la Visita Especial" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card agenda-card">
+             <div class="card-image">
+              <img src="/images/flayer-muestradebateria.jpg" alt="Muestra de Batería" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <h3 class="card-title text-accent">Muestra de Percusión</h3>
+              <p>Todo el ritmo y la energía de nuestros alumnos en escena.</p>
+              <div style="text-align: center; margin-top: auto;">
+                <a href="https://wa.me/543874535157?text=Hola, quiero comprar entrada para la Muestra de Batería" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card agenda-card">
+             <div class="card-image">
+              <img src="/images/obra1.jpg" alt="Obra de Teatro" loading="lazy" />
+            </div>
+             <div class="card-content">
+              <h3 class="card-title text-accent">Función Teatral</h3>
+              <p>Nueva obra del grupo El Laberinto. ¡No te la pierdas!</p>
+              <div style="text-align: center; margin-top: auto;">
+                 <a href="https://wa.me/543874535157?text=Hola, quiero comprar entrada para la Función de Teatro" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- SECCIÓN TALLERES -->
     <section class="section bg-light" id="talleres">
@@ -85,7 +142,7 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
         
         <div class="gallery-grid">
           <div class="gallery-item item-1">
-            <img src="/images/gallery-1.jpg" alt="Obra de teatro" loading="lazy" />
+            <img src="/images/muestra-percusion2.jpg" alt="Muestra de percusión" loading="lazy" />
           </div>
           <div class="gallery-item item-2">
              <img src="/images/gallery-2.jpg" alt="Muestra de música" loading="lazy" />
@@ -109,6 +166,18 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
 
 <style>
   .text-left { text-align: left; }
+  
+  /* Mobile: Center title */
+  @media (max-width: 768px) {
+    .section-title.text-left {
+      text-align: center;
+    }
+    
+    .about-content {
+      text-align: center;
+    }
+  }
+  
   .text-primary { color: var(--color-primary-500); }
   .bg-light { background-color: var(--color-neutral-50); }
   
@@ -120,11 +189,16 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
     padding-top: var(--space-20);
   }
 
+  #agenda {
+    padding-top: var(--space-10); /* Reducir espacio superior */
+  }
+
   .lead {
     font-size: var(--font-size-xl);
     font-weight: 500;
-    color: var(--color-primary-800);
+    color: var(--color-text-primary); /* White text for dark background */
     margin-bottom: var(--space-6);
+    line-height: var(--line-height-relaxed);
   }
 
   .rounded-image {
@@ -160,6 +234,60 @@ const comunidad = (await getCollection('comunidad')).filter(item => item.data.de
     overflow: hidden;
     border-radius: var(--radius-lg);
     position: relative;
+  }
+  
+  .agenda-card .card-image {
+    aspect-ratio: 4/5; /* Formato flyer vertical */
+    overflow: hidden;
+    background-color: var(--color-neutral-900); /* Fondo oscuro para el relleno */
+  }
+
+  .agenda-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Mostrar imagen completa */
+    transition: transform 0.5s ease;
+  }
+
+  .agenda-card:hover .card-image img {
+    transform: scale(1.03);
+  }
+
+  .agenda-card .card-content {
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+  }
+
+  .agenda-card .card-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2);
+  }
+  
+  .mt-4 { margin-top: var(--space-4); }
+
+  .btn-outline {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-accent-400);
+    color: var(--color-accent-400);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all 0.3s;
+    text-align: center;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-accent-400);
+    color: var(--color-neutral-900);
+  }
+
+  .centered-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    min-width: 200px;
   }
   
   .gallery-item img {

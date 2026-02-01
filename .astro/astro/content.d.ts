@@ -141,23 +141,37 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"comunidad": {
-"encuentros-intergeneracionales.md": {
-	id: "encuentros-intergeneracionales.md";
-  slug: "encuentros-intergeneracionales";
+"actividades-comunitarias.md": {
+	id: "actividades-comunitarias.md";
+  slug: "actividades-comunitarias";
   body: string;
   collection: "comunidad";
   data: InferEntrySchema<"comunidad">
 } & { render(): Render[".md"] };
-"inti-raymi.md": {
-	id: "inti-raymi.md";
-  slug: "inti-raymi";
+"eventos-celebraciones.md": {
+	id: "eventos-celebraciones.md";
+  slug: "eventos-celebraciones";
   body: string;
   collection: "comunidad";
   data: InferEntrySchema<"comunidad">
 } & { render(): Render[".md"] };
-"murales-comunitarios.md": {
-	id: "murales-comunitarios.md";
-  slug: "murales-comunitarios";
+"integrantes.md": {
+	id: "integrantes.md";
+  slug: "integrantes";
+  body: string;
+  collection: "comunidad";
+  data: InferEntrySchema<"comunidad">
+} & { render(): Render[".md"] };
+"murales-arte-publico.md": {
+	id: "murales-arte-publico.md";
+  slug: "murales-arte-publico";
+  body: string;
+  collection: "comunidad";
+  data: InferEntrySchema<"comunidad">
+} & { render(): Render[".md"] };
+"obras-destacadas.md": {
+	id: "obras-destacadas.md";
+  slug: "obras-destacadas";
   body: string;
   collection: "comunidad";
   data: InferEntrySchema<"comunidad">
@@ -202,6 +216,13 @@ declare module 'astro:content' {
 "guitarra-bajo.md": {
 	id: "guitarra-bajo.md";
   slug: "guitarra-bajo";
+  body: string;
+  collection: "talleres";
+  data: InferEntrySchema<"talleres">
+} & { render(): Render[".md"] };
+"interpretacion-escenica.md": {
+	id: "interpretacion-escenica.md";
+  slug: "interpretacion-escenica";
   body: string;
   collection: "talleres";
   data: InferEntrySchema<"talleres">

@@ -33,6 +33,9 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
     </div>
     <h3 class="card-title">{data.titulo}</h3>
     <p class="card-description">{data.descripcion}</p>
+    <div style="margin-top: auto; padding-top: var(--space-4);">
+        <a href={`/comunidad/${slug}`} class="btn-link">Ver más →</a>
+    </div>
   </div>
 </article>
 
@@ -99,10 +102,13 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
     color: var(--color-text-secondary);
   }
 
-  .badge.type-encuentro { background-color: var(--color-secondary-100); color: var(--color-secondary-800); }
-  .badge.type-mural { background-color: var(--color-accent-100); color: var(--color-accent-800); }
-  .badge.type-celebracion { background-color: var(--color-primary-100); color: var(--color-primary-800); }
-  .badge.type-jornada { background-color: var(--color-neutral-200); color: var(--color-neutral-800); }
+  .badge.type-encuentro { background-color: var(--color-primary-800); color: var(--color-primary-100); }
+  .badge.type-mural { background-color: var(--color-accent-700); color: var(--color-accent-50); }
+  .badge.type-celebracion { background-color: var(--color-accent-500); color: var(--color-neutral-900); }
+  .badge.type-jornada { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
+  .badge.type-obra { background-color: var(--color-primary-600); color: var(--color-primary-50); }
+  .badge.type-integrantes { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
+  .badge.type-trayectoria { background-color: var(--color-accent-400); color: var(--color-neutral-900); }
 
   .date {
     font-size: var(--font-size-xs);
@@ -119,5 +125,23 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
     color: var(--color-text-secondary);
     font-size: var(--font-size-sm);
     margin-bottom: 0;
+  }
+
+  .btn-link {
+    color: var(--color-primary-500);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s;
+  }
+
+  .btn-link:hover {
+    color: var(--color-primary-600);
+    text-decoration: underline;
+  }
+
+  .btn-link:hover {
+    color: var(--color-primary-600);
+    text-decoration: underline;
   }
 </style>

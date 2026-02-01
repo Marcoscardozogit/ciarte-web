@@ -16,6 +16,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
           <h3>Dirección</h3>
           <p>{siteSettings.direccion}</p>
           <p class="text-muted">Centro de Jubilados Los Olivos</p>
+          <a href="https://maps.app.goo.gl/Ku8jmkFXLfMrN8aD7" target="_blank" rel="noopener noreferrer" class="map-link">Ver en Google Maps →</a>
         </div>
 
         <div class="info-card">
@@ -26,6 +27,15 @@ import WhatsAppButton from './WhatsAppButton.astro';
           </div>
         </div>
 
+        <div class="info-card">
+          <h3>Correo Electrónico</h3>
+          <p>Escribinos por email para consultas.</p>
+          <a href={`mailto:${siteSettings.email}`} class="email-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            {siteSettings.email}
+          </a>
+        </div>
+
         <div class="info-card redes">
           <h3>Seguinos</h3>
           <p>Enterate de todas las novedades en nuestras redes.</p>
@@ -33,7 +43,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
             {siteSettings.facebook && (
               <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" class="social-btn facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                Facebook
+                El Laberinto
+              </a>
+            )}
+            {siteSettings.facebook2 && (
+              <a href={siteSettings.facebook2} target="_blank" rel="noopener noreferrer" class="social-btn facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                CIArte
               </a>
             )}
             {siteSettings.instagram && (
@@ -64,54 +80,60 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
 <style>
   .contact-section {
-    background-color: var(--color-surface);
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: var(--space-8);
-  }
-
-  .contact-grid {
-    align-items: stretch;
-  }
-
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
+    background-color: var(--color-background); /* Dark */
   }
 
   .info-card {
-    background-color: var(--color-background);
+    background-color: var(--color-surface); /* Darker */
     padding: var(--space-6);
     border-radius: var(--radius-xl);
-    border: 1px solid var(--color-neutral-200);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
   }
 
   .info-card h3 {
-    color: var(--color-primary-600);
+    color: var(--color-primary-500); /* Red */
     margin-bottom: var(--space-3);
     font-size: var(--font-size-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .text-muted {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
+  }
+
+  .map-link {
+    display: inline-block;
     margin-top: var(--space-2);
+    color: var(--color-accent-400);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
   }
 
-  .cta-wrapper {
-    margin-top: var(--space-4);
+  .map-link:hover {
+    text-decoration: underline;
   }
 
-  .social-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    margin-top: var(--space-4);
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    color: var(--color-accent-400);
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
 
+  .email-link:hover {
+    color: var(--color-accent-300);
+    text-decoration: underline;
+  }
+
+  /* Social Buttons Dark Mode */
   .social-btn {
     display: flex;
     align-items: center;
@@ -121,19 +143,26 @@ import WhatsAppButton from './WhatsAppButton.astro';
     font-weight: 500;
     transition: transform 0.2s ease;
     text-decoration: none;
+    background-color: var(--color-neutral-900);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
   }
 
   .social-btn:hover {
     transform: translateX(4px);
+    border-color: var(--color-accent-400);
+    color: var(--color-accent-400);
   }
 
-  .social-btn.facebook {
-    background-color: #e7f5ff;
+  .social-btn.facebook:hover {
+    background-color: rgba(24, 119, 242, 0.1);
+    border-color: #1877f2;
     color: #1877f2;
   }
 
-  .social-btn.instagram {
-    background-color: #fff0f6;
+  .social-btn.instagram:hover {
+    background-color: rgba(225, 48, 108, 0.1);
+    border-color: #e1306c;
     color: #e1306c;
   }
 
@@ -141,12 +170,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
     min-height: 400px;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
   }
 
   iframe {
     width: 100%;
     height: 100%;
-    filter: grayscale(0.2); /* Estilo un poco desaturado para que combine mejor */
+    filter: invert(0.9) hue-rotate(180deg) brightness(0.8) contrast(1.2); /* Dark Map */
   }
 </style>

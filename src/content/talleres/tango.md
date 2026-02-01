@@ -1,13 +1,17 @@
 ---
 titulo: "Tango"
 descripcion: "Aprendé a bailar tango, conectá con el abrazo y la música ciudadana. Clases para principiantes y avanzados."
-imagen: "/images/flyer-tango.jpg"
+imagen: "/images/clases-tango3.png"
+flyer: "/images/clases-tango.png"
 horarios: "Miércoles 20:00"
 edadNivel: "Jóvenes y Adultos"
 docente: "Docente de Tango"
 activo: true
 orden: 3
-isFlyer: true
+galeria:
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
+  - "/images/hero-bg.jpg"
 ---
 
 ## Clases de Tango Danza

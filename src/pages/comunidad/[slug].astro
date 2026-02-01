@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const comunidad = await getCollection('comunidad');
+  return comunidad.map(actividad => ({
+    params: { slug: actividad.slug },
+    props: { actividad },
+  }));
+}
+
+const { actividad } = Astro.props;
+const { Content } = await actividad.render();
+
+// Navegación específica para comunidad (volver a Inicio)
+const comunidadNavItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Volver', href: '/#comunidad' },
+];
+---
+
+<Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} navItems={comunidadNavItems}>
+  <article class="comunidad-detail">
+    <header class="comunidad-header">
+      <div class="header-bg" style={`background-image: url(${actividad.data.imagen || '/images/hero-bg.jpg'})`}></div>
+      <div class="header-overlay"></div>
+      <div class="container header-content">
+        <span class={`badge type-${actividad.data.tipo}`}>{actividad.data.tipo}</span>
+        <h1 class="comunidad-title">{actividad.data.titulo}</h1>
+        {actividad.data.fecha && (
+             <p class="comunidad-date">
+                {new Date(actividad.data.fecha).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })}
+             </p>
+        )}
+      </div>
+    </header>
+
+    <div class="container content-container">
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+
+    {actividad.data.galeria && actividad.data.galeria.length > 0 && (
+      <div class="container gallery-container">
+        <h2 class="gallery-title">Galería de Fotos</h2>
+        <div class="gallery-grid">
+          {actividad.data.galeria.map(img => (
+            <div class="gallery-item">
+              <img src={img} alt={`Imagen de ${actividad.data.titulo}`} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</Layout>
+
+<style>
+  .comunidad-header {
+    position: relative;
+    padding-top: 200px;
+    padding-bottom: 80px;
+    color: white;
+    text-align: center;
+    margin-bottom: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary-900);
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+  }
+
+  .header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .comunidad-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+  }
+
+  .comunidad-date {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+  }
+
+  .badge {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: white;
+    color: var(--color-neutral-900);
+  }
+
+  .badge.type-mural { background-color: var(--color-accent-700); color: var(--color-accent-50); }
+  .badge.type-celebracion { background-color: var(--color-accent-500); color: var(--color-neutral-900); }
+  .badge.type-obra { background-color: var(--color-primary-600); color: var(--color-primary-50); }
+  .badge.type-integrantes { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
+  .badge.type-encuentro { background-color: var(--color-primary-800); color: var(--color-primary-100); }
+  .badge.type-jornada { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
+  .badge.type-trayectoria { background-color: var(--color-accent-400); color: var(--color-neutral-900); }
+
+  .content-container {
+    max-width: 800px; /* Lectura cómoda */
+    margin: 0 auto;
+    padding-bottom: var(--space-12);
+  }
+
+  .prose {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary); /* Depende del tema, si es dark */
+  }
+  
+  /* Asegurar legibilidad si prose está sobre fondo oscuro en layout */
+  :global(body) {
+      /* Asumimos layout hereda dark mode o tiene fondo */
+  }
+
+  /* Gallery Styles */
+  .gallery-container {
+    padding-bottom: var(--space-20);
+    border-top: 1px solid var(--color-neutral-800);
+    padding-top: var(--space-12);
+  }
+
+  .gallery-title {
+    font-size: var(--font-size-2xl);
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-8);
+    text-align: center;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .gallery-item {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-md);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+</style>
