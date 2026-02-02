@@ -1,17 +1,17 @@
 ---
 titulo: "Danza Folclórica"
 descripcion: "Nuestras raíces en movimiento. Aprendé a bailar zamba, chacarera, gato y escondido en un ambiente divertido y familiar."
-imagen: "/images/clases-danzafolclorica.png"
-flyer: "/images/clases-danzafolclorica3.png"
+imagen: "../../assets/images/clases-danzafolclorica.png"
+flyer: "../../assets/images/clases-danzafolclorica3.png"
 horarios: "Miércoles y Viernes 19:00"
 edadNivel: "Jóvenes y Adultos"
 docente: "Profe de Danza"
 activo: true
 orden: 11
 galeria:
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
 ---
 
 ## Taller de Danza Folclórica

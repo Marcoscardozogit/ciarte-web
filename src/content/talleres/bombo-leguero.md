@@ -1,17 +1,17 @@
 ---
 titulo: "Bombo Legüero"
 descripcion: "Sentí el latido de la tierra. Clases de percusión folclórica centradas en el bombo legüero y ritmos argentinos."
-imagen: "/images/clases-bomboleguero.png"
-flyer: "/images/clases-bomboleguero5.png"
+imagen: "../../assets/images/clases-bomboleguero.png"
+flyer: "../../assets/images/clases-bomboleguero5.png"
 horarios: "Sábados 10:00"
 edadNivel: "Todas las edades"
 docente: "Profe de Percusión"
 activo: true
 orden: 5
 galeria:
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
 ---
 
 ## Percusión Folclórica: Bombo Legüero

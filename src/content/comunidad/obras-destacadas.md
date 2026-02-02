@@ -1,7 +1,7 @@
 ---
 titulo: "Obras Premiadas"
 descripcion: "Producciones teatrales del grupo El Laberinto reconocidas a nivel provincial y nacional."
-imagen: "/images/trayectoria.jpg"
+imagen: "../../assets/images/trayectoria.jpg"
 fecha: 2024-12-01
 tipo: "trayectoria"
 destacado: true

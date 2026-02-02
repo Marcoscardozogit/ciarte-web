@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -12,7 +13,7 @@ const { data, slug } = taller;
 <article class="card taller-card">
   <div class={`card-image ${data.isFlyer ? 'flyer-mode' : ''}`}>
     {data.imagen ? (
-      <img src={data.imagen} alt={`Taller de ${data.titulo}`} loading="lazy" />
+      <Image src={data.imagen} alt={`Taller de ${data.titulo}`} />
     ) : (
       <div class="placeholder-image">
         <span>{data.titulo}</span>

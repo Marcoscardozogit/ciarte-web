@@ -1,0 +1,62 @@
+{
+  "$ref": "#/definitions/talleres",
+  "definitions": {
+    "talleres": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "imagen": {
+          "type": "string"
+        },
+        "flyer": {
+          "type": "string"
+        },
+        "horarios": {
+          "type": "string"
+        },
+        "edadNivel": {
+          "type": "string"
+        },
+        "docente": {
+          "type": "string"
+        },
+        "activo": {
+          "type": "boolean",
+          "default": true
+        },
+        "orden": {
+          "type": "number",
+          "default": 0
+        },
+        "galeria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bioDocente": {
+          "type": "string"
+        },
+        "fotoDocente": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "titulo",
+        "descripcion",
+        "horarios",
+        "edadNivel"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

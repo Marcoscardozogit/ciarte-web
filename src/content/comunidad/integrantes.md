@@ -1,15 +1,15 @@
 ---
 titulo: "Integrantes y Equipo"
 descripcion: "Conocé a las personas que hacen posible CIArte: docentes, coordinadores y colaboradores."
-imagen: "/images/integrantes3.jpg"
+imagen: "../../assets/images/integrantes3.jpg"
 fecha: 2024-01-01
 tipo: "integrantes"
 destacado: true
 orden: 5
 galeria:
-  - "/images/integrantes3.jpg"
-  - "/images/perfildos.jpg"
-  - "/images/perfiluno.jpg"
+  - "../../assets/images/integrantes1.jpg"
+  - "../../assets/images/integrantes2.jpg"
+  - "../../assets/images/integrantes3.jpg"
 ---
 
 ## Nuestro Equipo Humano

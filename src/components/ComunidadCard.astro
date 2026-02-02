@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -19,7 +20,7 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
 <article class="card comunidad-card">
   <div class="card-image">
     {data.imagen ? (
-      <img src={data.imagen} alt={data.titulo} loading="lazy" />
+      <Image src={data.imagen} alt={data.titulo} />
     ) : (
       <div class={`placeholder-image type-${data.tipo}`}>
         <span>{data.tipo}</span>

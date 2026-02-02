@@ -1,6 +1,10 @@
 ---
 import siteSettings from '../content/settings/site.json';
 
+import { Image } from 'astro:assets';
+import logoLaberinto from '../assets/images/ellaberintologonuevo.png';
+import logoCiarte from '../assets/images/ciartelogonuevo-1.png';
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -14,20 +18,20 @@ const currentYear = new Date().getFullYear();
           Un proyecto de <strong>El Laberinto</strong> Grupo de Teatro Independiente en articulación con el Centro de Jubilados Los Olivos.
         </p>
         <div class="footer-logos">
-          <img src="/images/ellaberintologonuevo.png" alt="Logo El Laberinto" class="partner-logo" />
-          <img src="/images/ciartelogonuevo-1.png" alt="Logo CIArte" class="partner-logo" />
+          <Image src={logoLaberinto} alt="Logo El Laberinto" class="partner-logo" />
+          <Image src={logoCiarte} alt="Logo CIArte" class="partner-logo" />
         </div>
       </div>
 
       <div class="footer-nav">
         <h4>Secciones</h4>
         <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#agenda">Agenda</a></li>
-          <li><a href="#talleres">Talleres</a></li>
-          <li><a href="#comunidad">Comunidad</a></li>
-          <li><a href="#galeria">Galería</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="/#inicio">Inicio</a></li>
+          <li><a href="/#agenda">Agenda</a></li>
+          <li><a href="/#talleres">Talleres</a></li>
+          <li><a href="/#comunidad">Comunidad</a></li>
+          <li><a href="/#galeria">Galería</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
         </ul>
       </div>
 
@@ -122,6 +126,12 @@ const currentYear = new Date().getFullYear();
     width: auto;
     opacity: 1;
     transition: transform var(--transition-normal);
+  }
+
+  @media (min-width: 768px) {
+    .partner-logo {
+      height: 180px;
+    }
   }
 
   .partner-logo:hover {

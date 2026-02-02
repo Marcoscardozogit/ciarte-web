@@ -1,18 +1,18 @@
 ---
 titulo: "Eventos y Celebraciones"
 descripcion: "Celebraciones colectivas que marcan nuestro calendario anual, desde el Inti Raymi hasta aniversarios."
-imagen: "/images/comunidad5.jpg"
+imagen: "../../assets/images/comunidad5.jpg"
 fecha: 2025-06-21
 tipo: "celebracion"
 destacado: true
 orden: 3
 galeria:
-  - "/images/comunidad5.jpg"
-  - "/images/comunidad7.jpg"
-  - "/images/evento2-comunidad.jpg"
-  - "/images/evento2-comunidad1.jpg"
-  - "/images/evento2-comunidad2.jpg"
-  - "/images/evento2-comunidad3.jpg"
+  - "../../assets/images/comunidad5.jpg"
+  - "../../assets/images/comunidad7.jpg"
+  - "../../assets/images/evento2-comunidad.jpg"
+  - "../../assets/images/evento2-comunidad1.jpg"
+  - "../../assets/images/evento2-comunidad2.jpg"
+  - "../../assets/images/evento2-comunidad3.jpg"
 ---
 
 ## Celebrar en Comunidad

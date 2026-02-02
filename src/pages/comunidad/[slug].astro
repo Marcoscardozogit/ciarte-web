@@ -2,6 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+import { Image } from 'astro:assets';
+import defaultImage from '../../assets/images/hero-bg.jpg';
+
 export async function getStaticPaths() {
   const comunidad = await getCollection('comunidad');
   return comunidad.map(actividad => ({
@@ -18,12 +21,14 @@ const comunidadNavItems = [
   { label: 'Inicio', href: '/' },
   { label: 'Volver', href: '/#comunidad' },
 ];
+
+const bgImage = actividad.data.imagen?.src || defaultImage.src;
 ---
 
 <Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} navItems={comunidadNavItems}>
   <article class="comunidad-detail">
     <header class="comunidad-header">
-      <div class="header-bg" style={`background-image: url(${actividad.data.imagen || '/images/hero-bg.jpg'})`}></div>
+      <div class="header-bg" style={`background-image: url(${bgImage})`}></div>
       <div class="header-overlay"></div>
       <div class="container header-content">
         <span class={`badge type-${actividad.data.tipo}`}>{actividad.data.tipo}</span>
@@ -48,7 +53,7 @@ const comunidadNavItems = [
         <div class="gallery-grid">
           {actividad.data.galeria.map(img => (
             <div class="gallery-item">
-              <img src={img} alt={`Imagen de ${actividad.data.titulo}`} loading="lazy" />
+              <Image src={img} alt={`Imagen de ${actividad.data.titulo}`} />
             </div>
           ))}
         </div>

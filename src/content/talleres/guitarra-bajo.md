@@ -1,17 +1,17 @@
 ---
 titulo: "Guitarra y Bajo"
 descripcion: "Aprendé a tocar tus canciones favoritas. Acordes, punteos, acompañamiento y técnica para guitarra criolla, eléctrica y bajo."
-imagen: "/images/clases-guitarraybajo1.png"
-flyer: "/images/clases-guitarraybajo4.png"
+imagen: "../../assets/images/clases-guitarraybajo1.png"
+flyer: "../../assets/images/clases-guitarraybajo4.png"
 horarios: "Martes y Jueves 19:00"
 edadNivel: "Desde 10 años"
 docente: "Profe de Cuerdas"
 activo: true
 orden: 7
 galeria:
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
 ---
 
 ## Taller de Guitarra y Bajo

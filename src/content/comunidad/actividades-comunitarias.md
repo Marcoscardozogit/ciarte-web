@@ -1,15 +1,15 @@
 ---
 titulo: "Actividades Comunitarias"
 descripcion: "Jornadas de encuentro, arte en los barrios y actividades solidarias que tejen redes vecinales."
-imagen: "/images/evento-comunidad6.jpg"
+imagen: "../../assets/images/evento-comunidad6.jpg"
 fecha: 2024-10-10
 tipo: "encuentro"
 destacado: true
 orden: 2
 galeria:
-  - "/images/evento-comunidad3.jpg"
-  - "/images/evento-comunidad6.jpg"
-  - "/images/gallery-4.jpg"
+  - "../../assets/images/evento-comunidad3.jpg"
+  - "../../assets/images/evento-comunidad6.jpg"
+  - "../../assets/images/gallery-4.jpg"
 ---
 
 ## Arte en el Barrio

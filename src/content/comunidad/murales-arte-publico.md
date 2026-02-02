@@ -1,20 +1,20 @@
 ---
 titulo: "Murales y Arte Público"
 descripcion: "Embelleciendo nuestro entorno y contando nuestra historia a través de murales participativos."
-imagen: "/images/remodelacion-terminada.jpg"
+imagen: "../../assets/images/remodelacion-terminada.jpg"
 fecha: 2024-11-15
 tipo: "mural"
 destacado: true
 orden: 4
 galeria:
-  - "/images/remodelacion-inicio2.jpg"
-  - "/images/remodelacion-proceso1.jpg"
-  - "/images/remodelacion-proceso2.jpg"
-  - "/images/remodelacion-final.jpg"
-  - "/images/remodelacion-final4.jpg"
-  - "/images/remodelacion-terminada.jpg"
-  - "/images/remodelacion-terminada1.jpg"
-  - "/images/remodelacion-terminada3.jpg"
+  - "../../assets/images/remodelacion-inicio2.jpg"
+  - "../../assets/images/remodelacion-proceso1.jpg"
+  - "../../assets/images/remodelacion-proceso2.jpg"
+  - "../../assets/images/remodelacion-final.jpg"
+  - "../../assets/images/remodelacion-final4.jpg"
+  - "../../assets/images/remodelacion-terminada.jpg"
+  - "../../assets/images/remodelacion-terminada1.jpg"
+  - "../../assets/images/remodelacion-terminada3.jpg"
 ---
 
 ## Paredes que Hablan

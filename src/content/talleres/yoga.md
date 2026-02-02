@@ -1,17 +1,17 @@
 ---
 titulo: "Yoga"
 descripcion: "Bienestar para cuerpo y mente. Clases de Hatha Yoga para mejorar la flexibilidad, la respiración y encontrar el equilibrio."
-imagen: "/images/clases-yoga.png"
-flyer: "/images/clases-yoga3.png"
+imagen: "../../assets/images/clases-yoga.png"
+flyer: "../../assets/images/clases-yoga3.png"
 horarios: "Martes y Jueves 15:00"
 edadNivel: "Todas las edades"
 docente: "Profe de Yoga"
 activo: true
 orden: 10
 galeria:
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
 ---
 
 ## Taller de Yoga

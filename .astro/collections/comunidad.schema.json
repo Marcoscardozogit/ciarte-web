@@ -1,0 +1,72 @@
+{
+  "$ref": "#/definitions/comunidad",
+  "definitions": {
+    "comunidad": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "imagen": {
+          "type": "string"
+        },
+        "fecha": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "tipo": {
+          "type": "string",
+          "enum": [
+            "encuentro",
+            "jornada",
+            "mural",
+            "celebracion",
+            "obra",
+            "integrantes",
+            "trayectoria",
+            "otro"
+          ],
+          "default": "otro"
+        },
+        "destacado": {
+          "type": "boolean",
+          "default": false
+        },
+        "orden": {
+          "type": "number",
+          "default": 99
+        },
+        "galeria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "titulo",
+        "descripcion"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

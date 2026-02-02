@@ -5,6 +5,18 @@ import ContactSection from '../components/ContactSection.astro';
 import TallerCard from '../components/TallerCard.astro';
 import ComunidadCard from '../components/ComunidadCard.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// Import images
+import aboutImage from '../assets/images/gallery-6.jpg';
+import agendaImg1 from '../assets/images/flayer-invitado.jpg';
+import agendaImg2 from '../assets/images/flayer-muestradebateria.jpg';
+import agendaImg3 from '../assets/images/obra1.jpg';
+import galleryImg1 from '../assets/images/muestra-percusion2.jpg';
+import galleryImg2 from '../assets/images/gallery-2.jpg';
+import galleryImg3 from '../assets/images/gallery-3.jpg';
+import galleryImg4 from '../assets/images/gallery-4.jpg';
+import galleryImg5 from '../assets/images/gallery-5.jpg';
 
 // Obtener datos
 const talleres = (await getCollection('talleres')).sort((a, b) => a.data.orden - b.data.orden);
@@ -37,7 +49,7 @@ const comunidad = (await getCollection('comunidad'))
             </p>
           </div>
           <div class="about-image">
-             <img src="/images/gallery-6.jpg" alt="Actividades en CIArte" class="rounded-image" />
+             <Image src={aboutImage} alt="Actividades en CIArte" class="rounded-image" />
           </div>
         </div>
       </div>
@@ -56,7 +68,7 @@ const comunidad = (await getCollection('comunidad'))
         <div class="grid-3">
           <article class="card agenda-card">
             <div class="card-image">
-              <img src="/images/flayer-invitado.jpg" alt="Evento Especial con Invitado" loading="lazy" />
+              <Image src={agendaImg1} alt="Evento Especial con Invitado" />
             </div>
             <div class="card-content">
               <h3 class="card-title text-accent">Visita Especial</h3>
@@ -69,7 +81,7 @@ const comunidad = (await getCollection('comunidad'))
 
           <article class="card agenda-card">
              <div class="card-image">
-              <img src="/images/flayer-muestradebateria.jpg" alt="Muestra de Batería" loading="lazy" />
+              <Image src={agendaImg2} alt="Muestra de Batería" />
             </div>
             <div class="card-content">
               <h3 class="card-title text-accent">Muestra de Percusión</h3>
@@ -82,7 +94,7 @@ const comunidad = (await getCollection('comunidad'))
 
           <article class="card agenda-card">
              <div class="card-image">
-              <img src="/images/obra1.jpg" alt="Obra de Teatro" loading="lazy" />
+              <Image src={agendaImg3} alt="Obra de Teatro" />
             </div>
              <div class="card-content">
               <h3 class="card-title text-accent">Función Teatral</h3>
@@ -142,19 +154,19 @@ const comunidad = (await getCollection('comunidad'))
         
         <div class="gallery-grid">
           <div class="gallery-item item-1">
-            <img src="/images/muestra-percusion2.jpg" alt="Muestra de percusión" loading="lazy" />
+            <Image src={galleryImg1} alt="Muestra de percusión" />
           </div>
           <div class="gallery-item item-2">
-             <img src="/images/gallery-2.jpg" alt="Muestra de música" loading="lazy" />
+             <Image src={galleryImg2} alt="Muestra de música" />
           </div>
           <div class="gallery-item item-3">
-             <img src="/images/gallery-3.jpg" alt="Percusión" loading="lazy" />
+             <Image src={galleryImg3} alt="Percusión" />
           </div>
           <div class="gallery-item item-4">
-             <img src="/images/gallery-4.jpg" alt="Evento comunidad" loading="lazy" />
+             <Image src={galleryImg4} alt="Evento comunidad" />
           </div>
           <div class="gallery-item item-5">
-             <img src="/images/gallery-5.jpg" alt="Invitados" loading="lazy" />
+             <Image src={galleryImg5} alt="Invitados" />
           </div>
         </div>
       </div>
@@ -162,6 +174,62 @@ const comunidad = (await getCollection('comunidad'))
 
     <ContactSection />
   </main>
+  
+  <script type="application/ld+json" is:inline set:html={JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Visita Especial",
+      "startDate": "2026-02-20T20:00:00-03:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "CIArte",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "General Güemes",
+          "addressLocality": "Salta",
+          "addressCountry": "AR"
+        }
+      },
+      "description": "Un encuentro único con referentes de la cultura."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Muestra de Percusión",
+      "startDate": "2026-02-20T19:00:00-03:00",
+      "location": {
+        "@type": "Place",
+        "name": "CIArte",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "General Güemes",
+          "addressLocality": "Salta",
+          "addressCountry": "AR"
+        }
+      },
+      "description": "Todo el ritmo y la energía de nuestros alumnos en escena."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TheaterEvent",
+      "name": "Función Teatral",
+      "startDate": "2026-02-20T21:00:00-03:00",
+      "location": {
+        "@type": "Place",
+        "name": "CIArte",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "General Güemes",
+          "addressLocality": "Salta",
+          "addressCountry": "AR"
+        }
+      },
+      "description": "Nueva obra del grupo El Laberinto."
+    }
+  ])} />
 </Layout>
 
 <style>
@@ -186,7 +254,13 @@ const comunidad = (await getCollection('comunidad'))
   .text-white-50 { color: rgba(255,255,255,0.7) !important; }
 
   .about-section {
-    padding-top: var(--space-20);
+    padding-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .about-section {
+      padding-top: var(--space-20);
+    }
   }
 
   #agenda {

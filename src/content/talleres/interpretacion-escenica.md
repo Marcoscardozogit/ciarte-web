@@ -1,8 +1,8 @@
 ---
 titulo: "Interpretación Escénica"
 descripcion: "Taller para cantantes. Potenciá tu presencia en el escenario y conectá profundamente con tu interpretación."
-imagen: "/images/clases-interpretacionescenica1.png"
-flyer: "/images/clases-interpretacionescenica.png"
+imagen: "../../assets/images/clases-interpretacionescenica1.png"
+flyer: "../../assets/images/clases-interpretacionescenica.png"
 horarios: "Consultar"
 edadNivel: "Jóvenes y Adultos"
 docente: "Staff CIArte"

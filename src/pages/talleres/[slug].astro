@@ -3,6 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import TallerCard from '../../components/TallerCard.astro';
 import { getCollection } from 'astro:content';
 
+import { Image } from 'astro:assets';
+import defaultImage from '../../assets/images/hero-bg.jpg'; // Using hero-bg as default since default-taller not found
+
 export async function getStaticPaths() {
   const talleres = await getCollection('talleres');
   return talleres.map(taller => ({
@@ -20,6 +23,8 @@ const tallerNavItems = [
   { label: 'Docente', href: '#docente' },
   { label: 'Galería', href: '#galeria' },
 ];
+
+const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImage.src;
 ---
 
 <Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.descripcion} navItems={tallerNavItems}>
@@ -32,8 +37,71 @@ const tallerNavItems = [
           <span class="badge secondary">{taller.data.horarios}</span>
         </div>
       </div>
-      <div class="header-bg" style={`background-image: url(${taller.data.flyer || taller.data.imagen || '/images/default-taller.jpg'})`}></div>
+      <div class="header-bg" style={`background-image: url(${bgImage})`}></div>
       <div class="header-overlay"></div>
+
+      <!-- Schema Course + Breadcrumb -->
+      <script type="application/ld+json" is:inline set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Course",
+            "name": taller.data.titulo,
+            "description": taller.data.descripcion,
+            "provider": {
+              "@type": "Organization",
+              "@id": "https://ciarte-ellaberinto.netlify.app/#organization",
+              "name": "CIArte – El Laberinto"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseMode": "onsite",
+              "courseWorkload": taller.data.horarios,
+              "instructor": taller.data.docente ? {
+                "@type": "Person",
+                "name": taller.data.docente
+              } : undefined,
+              "location": {
+                "@type": "Place",
+                "name": "CIArte",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "General Güemes",
+                  "addressRegion": "Salta",
+                  "addressCountry": "AR"
+                }
+              }
+            },
+            "audience": {
+              "@type": "Audience",
+              "audienceType": taller.data.edadNivel
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://ciarte-ellaberinto.netlify.app/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Talleres",
+                "item": "https://ciarte-ellaberinto.netlify.app/#talleres"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": taller.data.titulo,
+                "item": `https://ciarte-ellaberinto.netlify.app/talleres/${taller.slug}`
+              }
+            ]
+          }
+        ]
+      })} />
     </header>
 
     <div class="container content-container">
@@ -82,7 +150,7 @@ const tallerNavItems = [
           <div class="docente-card">
              <div class="docente-avatar">
                 {taller.data.fotoDocente ? (
-                  <img src={taller.data.fotoDocente} alt={taller.data.docente} />
+                  <Image src={taller.data.fotoDocente} alt={taller.data.docente} />
                 ) : (
                   <span>{taller.data.docente.charAt(0)}</span>
                 )}
@@ -101,7 +169,7 @@ const tallerNavItems = [
           <div class="gallery-grid">
             {taller.data.galeria.map(img => (
               <div class="gallery-item">
-                <img src={img} alt={`Imagen del taller de ${taller.data.titulo}`} loading="lazy" />
+                <Image src={img} alt={`Imagen del taller de ${taller.data.titulo}`} />
               </div>
             ))}
           </div>

@@ -1,17 +1,17 @@
 ---
 titulo: "Batería y Percusión"
 descripcion: "Ritmo, coordinación y potencia. Aprendé a tocar la batería y diversos instrumentos de percusión en distintos estilos."
-imagen: "/images/clases-bateriaypercusion.png"
-flyer: "/images/clases-bateriaypercusion3.png"
+imagen: "../../assets/images/clases-bateriaypercusion.png"
+flyer: "../../assets/images/clases-bateriaypercusion3.png"
 horarios: "Lunes y Miércoles 18:00"
 edadNivel: "Niños, Adol. y Adultos"
 docente: "Profe de Batería"
 activo: true
 orden: 6
 galeria:
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
-  - "/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
+  - "../../assets/images/hero-bg.jpg"
 ---
 
 ## Taller de Batería y Percusión

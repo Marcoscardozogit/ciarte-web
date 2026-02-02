@@ -1,5 +1,10 @@
 ---
 import WhatsAppButton from './WhatsAppButton.astro';
+import { getImage } from 'astro:assets';
+import heroImage from '../assets/images/integrantes5.jpg';
+
+const optimizedHero = await getImage({src: heroImage, format: 'webp', quality: 90});
+const heroUrl = `url(${optimizedHero.src})`;
 ---
 
 <section class="hero-section" id="inicio">
@@ -19,7 +24,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   </div>
 </section>
 
-<style>
+<style define:vars={{ heroUrl }}>
   .hero-section {
     position: relative;
     height: 90vh;
@@ -28,12 +33,20 @@ import WhatsAppButton from './WhatsAppButton.astro';
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: url('/images/integrantes5.jpg');
+    background-image: var(--heroUrl);
     background-size: cover;
     background-position: center;
     color: white;
     margin-top: -80px; /* Counteract header height */
     padding-top: 180px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 80vh;
+      min-height: 500px;
+      padding-top: 120px;
+    }
   }
 
   .hero-overlay {

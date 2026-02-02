@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Bloquear acceso al admin
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://ciarte-ellaberinto.netlify.app/sitemap-index.xml

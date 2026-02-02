@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Telón Caído | CIArte">
+  <main class="error-page">
+    <div class="container text-center">
+      <h1 class="error-title">404</h1>
+      <h2 class="error-subtitle">¡Se ha bajado el telón!</h2>
+      <p class="error-text">
+        Parece que la escena que buscas no está en el libreto. 
+        Regresa al escenario principal para continuar la función.
+      </p>
+      <a href="/" class="btn btn-primary mt-6">Volver al Inicio</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-neutral-900);
+    color: white;
+    background-image: radial-gradient(circle at center, rgba(165, 29, 45, 0.2) 0%, rgba(10, 10, 10, 1) 70%);
+  }
+
+  .error-title {
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--color-primary-500);
+    line-height: 1;
+    margin-bottom: var(--space-4);
+    text-shadow: 0 0 20px rgba(165, 29, 45, 0.5);
+  }
+
+  .error-subtitle {
+    font-size: 2rem;
+    margin-bottom: var(--space-4);
+    color: var(--color-accent-400);
+  }
+
+  .error-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+    color: var(--color-neutral-300);
+    margin-bottom: var(--space-8);
+  }
+
+  .mt-6 {
+    margin-top: var(--space-6);
+  }
+</style>
