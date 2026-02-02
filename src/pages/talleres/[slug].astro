@@ -8,7 +8,9 @@ import defaultImage from '../../assets/images/hero-bg.jpg'; // Using hero-bg as 
 
 export async function getStaticPaths() {
   const talleres = await getCollection('talleres');
-  return talleres.map(taller => ({
+  const activeTalleres = talleres.filter(taller => taller.data.activo);
+  
+  return activeTalleres.map(taller => ({
     params: { slug: taller.slug },
     props: { taller },
   }));
@@ -25,6 +27,16 @@ const tallerNavItems = [
 ];
 
 const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImage.src;
+
+// Resolver datos del docente (CMS object)
+const docenteNombre = taller.data.info_docente?.nombre;
+const docenteBio = taller.data.info_docente?.bio || "Profesional con amplia trayectoria y pasión por la enseñanza artística.";
+const docenteFoto = taller.data.info_docente?.foto;
+
+// Resolver WhatsApp
+import siteSettings from '../../content/settings/site.json';
+const whatsappNumber = taller.data.whatsapp_custom || siteSettings.whatsapp;
+
 ---
 
 <Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.descripcion} navItems={tallerNavItems}>
@@ -57,9 +69,9 @@ const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImag
               "@type": "CourseInstance",
               "courseMode": "onsite",
               "courseWorkload": taller.data.horarios,
-              "instructor": taller.data.docente ? {
+              "instructor": docenteNombre ? {
                 "@type": "Person",
-                "name": taller.data.docente
+                "name": docenteNombre
               } : undefined,
               "location": {
                 "@type": "Place",
@@ -124,16 +136,16 @@ const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImag
                 <strong>Público:</strong>
                 <span>{taller.data.edadNivel}</span>
               </li>
-              {taller.data.docente && (
+              {docenteNombre && (
                 <li>
                   <strong>Docente:</strong>
-                  <span>{taller.data.docente}</span>
+                  <span>{docenteNombre}</span>
                 </li>
               )}
             </ul>
             <div class="actions">
               <a 
-                href={`https://wa.me/543874535157?text=Hola, quiero inscribirme en el taller de ${taller.data.titulo}`} 
+                href={`https://wa.me/${whatsappNumber}?text=Hola, quiero inscribirme en el taller de ${taller.data.titulo}`} 
                 class="btn btn-primary full-width"
                 target="_blank"
               >
@@ -144,20 +156,20 @@ const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImag
         </aside>
       </div>
 
-      {taller.data.docente && (
+      {docenteNombre && (
         <section class="docente-section" id="docente">
           <h2 class="docente-title">Sobre el Docente</h2>
           <div class="docente-card">
              <div class="docente-avatar">
-                {taller.data.fotoDocente ? (
-                  <Image src={taller.data.fotoDocente} alt={taller.data.docente} />
+                {docenteFoto ? (
+                  <Image src={docenteFoto} alt={docenteNombre} />
                 ) : (
-                  <span>{taller.data.docente.charAt(0)}</span>
+                  <span>{docenteNombre.charAt(0)}</span>
                 )}
              </div>
              <div class="docente-info">
-               <h3>{taller.data.docente}</h3>
-               <p>{taller.data.bioDocente || "Profesional con amplia trayectoria y pasión por la enseñanza artística."}</p>
+               <h3>{docenteNombre}</h3>
+               <p>{docenteBio}</p>
              </div>
           </div>
         </section>
@@ -167,11 +179,14 @@ const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImag
         <section class="taller-gallery" id="galeria">
           <h2 class="gallery-title">Galería del Taller</h2>
           <div class="gallery-grid">
-            {taller.data.galeria.map(img => (
+            {taller.data.galeria.map(item => {
+              const img = item.image || item; // Support object or direct image
+              const alt = item.alt || `Imagen del taller de ${taller.data.titulo}`;
+              return (
               <div class="gallery-item">
-                <Image src={img} alt={`Imagen del taller de ${taller.data.titulo}`} />
+                <Image src={img} alt={alt} />
               </div>
-            ))}
+            )})}
           </div>
         </section>
       )}

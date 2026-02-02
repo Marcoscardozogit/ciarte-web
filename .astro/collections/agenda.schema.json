@@ -1,0 +1,53 @@
+{
+  "$ref": "#/definitions/agenda",
+  "definitions": {
+    "agenda": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string"
+        },
+        "fecha": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "imagen": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "whatsapp_ventas": {
+          "type": "string"
+        },
+        "texto_boton": {
+          "type": "string",
+          "default": "Comprar Entrada Ya"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "titulo",
+        "fecha",
+        "imagen",
+        "descripcion"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

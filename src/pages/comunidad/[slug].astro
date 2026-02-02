@@ -51,11 +51,14 @@ const bgImage = actividad.data.imagen?.src || defaultImage.src;
       <div class="container gallery-container">
         <h2 class="gallery-title">Galería de Fotos</h2>
         <div class="gallery-grid">
-          {actividad.data.galeria.map(img => (
+          {actividad.data.galeria.map(item => {
+             const img = item.image || item;
+             const alt = item.alt || `Imagen de ${actividad.data.titulo}`;
+             return (
             <div class="gallery-item">
-              <Image src={img} alt={`Imagen de ${actividad.data.titulo}`} />
+              <Image src={img} alt={alt} />
             </div>
-          ))}
+          )})}
         </div>
       </div>
     )}

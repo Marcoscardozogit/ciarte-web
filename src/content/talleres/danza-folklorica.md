@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-danzafolclorica.png"
 flyer: "../../assets/images/clases-danzafolclorica3.png"
 horarios: "Miércoles y Viernes 19:00"
 edadNivel: "Jóvenes y Adultos"
-docente: "Profe de Danza"
+info_docente:
+  nombre: "Profe de Danza"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 11
 galeria:

@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-yoga.png"
 flyer: "../../assets/images/clases-yoga3.png"
 horarios: "Martes y Jueves 15:00"
 edadNivel: "Todas las edades"
-docente: "Profe de Yoga"
+info_docente:
+  nombre: "Profe de Yoga"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 10
 galeria:

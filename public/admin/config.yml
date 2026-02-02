@@ -6,8 +6,8 @@ backend:
 local_backend: true
 
 # Carpeta de medios
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: "src/assets/images"
+public_folder: "../../assets/images"
 
 # Configuración regional
 locale: 'es'
@@ -25,14 +25,44 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
-      - { label: "Descripción corta", name: "descripcion", widget: "text" }
-      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - { label: "Descripción corta", name: "descripcion", widget: "text", required: true, hint: "Aparece en la tarjeta del taller" }
+      - { label: "Imagen Principal (Horizontal)", name: "imagen", widget: "image", required: true, hint: "Para la tarjeta en la lista de talleres" }
+      - { label: "Flyer (Vertical)", name: "flyer", widget: "image", required: true, hint: "Aparece en la página individual. Si no hay, usa la principal." }
       - { label: "Horarios", name: "horarios", widget: "string", hint: "Ej: Sábados 10:00 a 12:00" }
       - { label: "Edad / Nivel", name: "edadNivel", widget: "string", hint: "Ej: Todas las edades, Adultos, etc." }
-      - { label: "Docente", name: "docente", widget: "string", required: false }
+      - { label: "WhatsApp Inscripción (Opcional)", name: "whatsapp_custom", widget: "string", required: false, hint: "Si se deja vacío, usa el número general del sitio." }
+      
+      - label: "Información del Docente"
+        name: "info_docente"
+        widget: "object"
+        fields:
+          - { label: "Nombre del Docente", name: "nombre", widget: "string", required: true }
+          - { label: "Biografía Breve", name: "bio", widget: "text", required: true }
+          - { label: "Foto Docente", name: "foto", widget: "image", required: false }
+      
+      - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false }
+      
       - { label: "Activo", name: "activo", widget: "boolean", default: true }
       - { label: "Orden", name: "orden", widget: "number", default: 0, hint: "Orden de aparición (menor = primero)" }
       - { label: "Contenido detallado", name: "body", widget: "markdown" }
+
+  # ===== AGENDA CULTURAL =====
+  - name: "agenda"
+    label: "Agenda Cultural"
+    label_singular: "Evento"
+    folder: "src/content/agenda"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título del Evento", name: "titulo", widget: "string" }
+      - { label: "Fecha y Hora", name: "fecha", widget: "datetime", format: "YYYY-MM-DD HH:mm" }
+      - { label: "Flyer / Imagen", name: "imagen", widget: "image" }
+      - { label: "Descripción Corta", name: "descripcion", widget: "text" }
+      - { label: "WhatsApp Venta Entradas (Opcional)", name: "whatsapp_ventas", widget: "string", required: false, hint: "Si se deja vacío, usa el número general." }
+      - { label: "Texto Botón Compra", name: "texto_boton", widget: "string", default: "Comprar Entrada Ya" }
+
 
   # ===== COMUNIDAD =====
   - name: "comunidad"
@@ -46,7 +76,8 @@ collections:
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
-      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - { label: "Imagen Principal", name: "imagen", widget: "image", required: false }
+      - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false }
       - { label: "Fecha", name: "fecha", widget: "datetime", required: false }
       - label: "Tipo de actividad"
         name: "tipo"
@@ -56,6 +87,9 @@ collections:
           - { label: "Jornada", value: "jornada" }
           - { label: "Mural", value: "mural" }
           - { label: "Celebración", value: "celebracion" }
+          - { label: "Obra", value: "obra" }
+          - { label: "Integrantes", value: "integrantes" }
+          - { label: "Trayectoria", value: "trayectoria" }
           - { label: "Otro", value: "otro" }
         default: "encuentro"
       - { label: "Destacado", name: "destacado", widget: "boolean", default: false }
@@ -63,15 +97,34 @@ collections:
 
   # ===== CONFIGURACIÓN DEL SITIO =====
   - name: "settings"
-    label: "Configuración"
+    label: "Configuración Global"
     files:
-      - label: "Información del sitio"
+      - label: "Datos de Contacto y Redes"
         name: "site"
         file: "src/content/settings/site.json"
         fields:
           - { label: "Nombre del espacio", name: "nombre", widget: "string", default: "CIArte – El Laberinto" }
-          - { label: "Teléfono WhatsApp", name: "whatsapp", widget: "string", default: "3874535157" }
+          - { label: "Teléfono WhatsApp (General)", name: "whatsapp", widget: "string", default: "543874535157" }
+          - { label: "Email", name: "email", widget: "string" }
           - { label: "Dirección", name: "direccion", widget: "string" }
-          - { label: "Email", name: "email", widget: "string", required: false }
-          - { label: "Facebook", name: "facebook", widget: "string", required: false }
-          - { label: "Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Link Google Maps", name: "maps_link", widget: "string" }
+          - { label: "Facebook Page", name: "facebook", widget: "string" }
+          - { label: "Facebook Perfil", name: "facebook2", widget: "string" }
+          - { label: "Instagram", name: "instagram", widget: "string" }
+
+      - label: "Contenido Home (Qué es CIArte)"
+        name: "home_content"
+        file: "src/content/home/content.md"
+        fields:
+          - label: "Sección: Qué es CIArte"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "image", widget: "image" }
+          
+          - label: "Galería Home"
+            name: "home_gallery"
+            widget: "list"
+            fields:
+               - { label: "Imagen", name: "image", widget: "image" }
+               - { label: "Alt Text", name: "alt", widget: "string" }

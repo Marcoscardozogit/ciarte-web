@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-tango3.png"
 flyer: "../../assets/images/clases-tango.png"
 horarios: "Miércoles 20:00"
 edadNivel: "Jóvenes y Adultos"
-docente: "Docente de Tango"
+info_docente:
+  nombre: "Docente de Tango"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 3
 galeria:

@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-bateriaypercusion.png"
 flyer: "../../assets/images/clases-bateriaypercusion3.png"
 horarios: "Lunes y Miércoles 18:00"
 edadNivel: "Niños, Adol. y Adultos"
-docente: "Profe de Batería"
+info_docente:
+  nombre: "Profe de Batería"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 6
 galeria:

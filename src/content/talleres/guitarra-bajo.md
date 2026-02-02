@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-guitarraybajo1.png"
 flyer: "../../assets/images/clases-guitarraybajo4.png"
 horarios: "Martes y Jueves 19:00"
 edadNivel: "Desde 10 años"
-docente: "Profe de Cuerdas"
+info_docente:
+  nombre: "Profe de Cuerdas"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 7
 galeria:

@@ -52,10 +52,46 @@
           "default": 99
         },
         "galeria": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "image": {
+                        "type": "string"
+                      },
+                      "alt": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "image"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ]
         },
         "$schema": {
           "type": "string"

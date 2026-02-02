@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-canto1.png"
 flyer: "../../assets/images/clases-canto3.png"
 horarios: "Lunes 20:00"
 edadNivel: "Jóvenes y Adultos"
-docente: "Profe de Canto"
+info_docente:
+  nombre: "Profe de Canto"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 9
 galeria:

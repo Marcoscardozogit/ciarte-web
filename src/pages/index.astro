@@ -2,24 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ContactSection from '../components/ContactSection.astro';
+import AgendaSection from '../components/sections/AgendaSection.astro';
+import AboutSection from '../components/sections/AboutSection.astro';
+import GallerySection from '../components/sections/GallerySection.astro';
 import TallerCard from '../components/TallerCard.astro';
 import ComunidadCard from '../components/ComunidadCard.astro';
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 
 // Import images
-import aboutImage from '../assets/images/gallery-6.jpg';
-import agendaImg1 from '../assets/images/flayer-invitado.jpg';
-import agendaImg2 from '../assets/images/flayer-muestradebateria.jpg';
-import agendaImg3 from '../assets/images/obra1.jpg';
-import galleryImg1 from '../assets/images/muestra-percusion2.jpg';
-import galleryImg2 from '../assets/images/gallery-2.jpg';
-import galleryImg3 from '../assets/images/gallery-3.jpg';
-import galleryImg4 from '../assets/images/gallery-4.jpg';
-import galleryImg5 from '../assets/images/gallery-5.jpg';
+// Import images no longer needed directly here
+
 
 // Obtener datos
-const talleres = (await getCollection('talleres')).sort((a, b) => a.data.orden - b.data.orden);
+const talleres = (await getCollection('talleres'))
+  .filter(taller => taller.data.activo)
+  .sort((a, b) => a.data.orden - b.data.orden);
 const comunidad = (await getCollection('comunidad'))
   .filter(item => item.data.destacado)
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -30,83 +27,10 @@ const comunidad = (await getCollection('comunidad'))
     <Hero />
 
     <!-- SECCIÓN QUÉ ES CIARTE -->
-    <section class="section about-section" id="ciarte">
-      <div class="container">
-        <div class="grid-2 about-grid">
-          <div class="about-content">
-            <h2 class="section-title text-left">Qué es CIArte</h2>
-            <p class="lead">
-              Un espacio donde el arte se encuentra con la comunidad, las generaciones se abrazan y la cultura florece.
-            </p>
-            <p>
-              CIArte (Centro de Integración y Arte) funciona en el corazón del Centro de Jubilados Los Olivos. 
-              Es coordinado por <strong class="text-primary">El Laberinto Grupo de Teatro Independiente</strong>, 
-              con 19 años de trayectoria y una visión clara: el arte es un derecho y una herramienta de transformación social.
-            </p>
-            <p>
-              Aquí no solo enseñamos disciplinas artísticas; construimos comunidad, 
-              fomentamos el encuentro entre abuelos y nietos, y mantenemos viva nuestra identidad cultural.
-            </p>
-          </div>
-          <div class="about-image">
-             <Image src={aboutImage} alt="Actividades en CIArte" class="rounded-image" />
-          </div>
-        </div>
-      </div>
-    </section>
+    <AboutSection />
 
     <!-- SECCIÓN AGENDA -->
-    <section class="section bg-dark text-white" id="agenda">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title text-accent">Agenda Cultural</h2>
-          <p class="section-subtitle text-white-50">
-            Próximos eventos, funciones y muestras. ¡Agendalo!
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card agenda-card">
-            <div class="card-image">
-              <Image src={agendaImg1} alt="Evento Especial con Invitado" />
-            </div>
-            <div class="card-content">
-              <h3 class="card-title text-accent">Visita Especial</h3>
-              <p>Un encuentro único con referentes de la cultura.</p>
-              <div style="text-align: center; margin-top: auto;">
-                <a href="https://wa.me/543874535157?text=Hola, quiero reservar entrada para la Visita Especial" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card agenda-card">
-             <div class="card-image">
-              <Image src={agendaImg2} alt="Muestra de Batería" />
-            </div>
-            <div class="card-content">
-              <h3 class="card-title text-accent">Muestra de Percusión</h3>
-              <p>Todo el ritmo y la energía de nuestros alumnos en escena.</p>
-              <div style="text-align: center; margin-top: auto;">
-                <a href="https://wa.me/543874535157?text=Hola, quiero comprar entrada para la Muestra de Batería" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card agenda-card">
-             <div class="card-image">
-              <Image src={agendaImg3} alt="Obra de Teatro" />
-            </div>
-             <div class="card-content">
-              <h3 class="card-title text-accent">Función Teatral</h3>
-              <p>Nueva obra del grupo El Laberinto. ¡No te la pierdas!</p>
-              <div style="text-align: center; margin-top: auto;">
-                 <a href="https://wa.me/543874535157?text=Hola, quiero comprar entrada para la Función de Teatro" class="btn btn-outline mt-4" target="_blank">Comprar Entrada Ya</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <AgendaSection />
 
 
 
@@ -147,30 +71,7 @@ const comunidad = (await getCollection('comunidad'))
     </section>
 
     <!-- SECCIÓN GALERÍA -->
-    <section class="section bg-dark text-white" id="galeria">
-      <div class="container">
-        <h2 class="section-title text-white">Galería</h2>
-        <p class="section-subtitle text-white-50">Momentos que construyen nuestra historia.</p>
-        
-        <div class="gallery-grid">
-          <div class="gallery-item item-1">
-            <Image src={galleryImg1} alt="Muestra de percusión" />
-          </div>
-          <div class="gallery-item item-2">
-             <Image src={galleryImg2} alt="Muestra de música" />
-          </div>
-          <div class="gallery-item item-3">
-             <Image src={galleryImg3} alt="Percusión" />
-          </div>
-          <div class="gallery-item item-4">
-             <Image src={galleryImg4} alt="Evento comunidad" />
-          </div>
-          <div class="gallery-item item-5">
-             <Image src={galleryImg5} alt="Invitados" />
-          </div>
-        </div>
-      </div>
-    </section>
+    <GallerySection />
 
     <ContactSection />
   </main>

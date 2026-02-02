@@ -1,0 +1,45 @@
+{
+  "$ref": "#/definitions/settings",
+  "definitions": {
+    "settings": {
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        },
+        "whatsapp": {
+          "type": "string"
+        },
+        "direccion": {
+          "type": "string"
+        },
+        "maps_link": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "facebook2": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nombre",
+        "whatsapp",
+        "direccion",
+        "email"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

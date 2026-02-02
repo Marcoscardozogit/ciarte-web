@@ -2,7 +2,7 @@
 titulo: "Integrantes y Equipo"
 descripcion: "Conocé a las personas que hacen posible CIArte: docentes, coordinadores y colaboradores."
 imagen: "../../assets/images/integrantes3.jpg"
-fecha: 2024-01-01
+fecha: 2024-01-01T00:00:00.000Z
 tipo: "integrantes"
 destacado: true
 orden: 5

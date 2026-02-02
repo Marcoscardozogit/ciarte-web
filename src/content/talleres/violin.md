@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-violin.png"
 flyer: "../../assets/images/clases-violin1.png"
 horarios: "Viernes 17:00"
 edadNivel: "A partir de 8 años"
-docente: "Profe de Violín"
+info_docente:
+  nombre: "Profe de Violín"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 4
 galeria:

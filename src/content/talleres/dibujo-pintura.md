@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-dibujoypintura6.png"
 flyer: "../../assets/images/clases-dibujoypintura7.png"
 horarios: "Martes y Jueves 18:00"
 edadNivel: "Niños y Adultos"
-docente: "Profe de Arte"
+info_docente:
+  nombre: "Profe de Arte"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 2
 galeria:

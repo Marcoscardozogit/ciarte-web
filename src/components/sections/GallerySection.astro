@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+
+const home = await getEntry("home", "content");
+const { home_gallery } = home.data;
+---
+
+<section class="section bg-dark text-white" id="galeria">
+  <div class="container">
+    <h2 class="section-title text-white">Galería</h2>
+    <p class="section-subtitle text-white-50">
+      Momentos que construyen nuestra historia.
+    </p>
+
+    <div class="gallery-grid">
+      {home_gallery.map((item: any, index: number) => (
+        <div class={`gallery-item item-${index + 1}`}>
+          <Image src={item.image} alt={item.alt} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Gallery Grid Mosaic */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 200px);
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 250px);
+    }
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    position: relative;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .item-1 {
+    grid-area: 1 / 1 / 3 / 3;
+  } /* Large item */
+</style>

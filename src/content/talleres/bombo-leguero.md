@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-bomboleguero.png"
 flyer: "../../assets/images/clases-bomboleguero5.png"
 horarios: "Sábados 10:00"
 edadNivel: "Todas las edades"
-docente: "Profe de Percusión"
+info_docente:
+  nombre: "Profe de Percusión"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 5
 galeria:

@@ -22,7 +22,26 @@
         "edadNivel": {
           "type": "string"
         },
-        "docente": {
+        "info_docente": {
+          "type": "object",
+          "properties": {
+            "nombre": {
+              "type": "string"
+            },
+            "bio": {
+              "type": "string"
+            },
+            "foto": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "nombre",
+            "bio"
+          ],
+          "additionalProperties": false
+        },
+        "whatsapp_custom": {
           "type": "string"
         },
         "activo": {
@@ -34,16 +53,46 @@
           "default": 0
         },
         "galeria": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "bioDocente": {
-          "type": "string"
-        },
-        "fotoDocente": {
-          "type": "string"
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "image": {
+                        "type": "string"
+                      },
+                      "alt": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "image"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ]
         },
         "$schema": {
           "type": "string"
@@ -52,6 +101,8 @@
       "required": [
         "titulo",
         "descripcion",
+        "imagen",
+        "flyer",
         "horarios",
         "edadNivel"
       ],

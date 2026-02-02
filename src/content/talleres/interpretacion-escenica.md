@@ -5,7 +5,10 @@ imagen: "../../assets/images/clases-interpretacionescenica1.png"
 flyer: "../../assets/images/clases-interpretacionescenica.png"
 horarios: "Consultar"
 edadNivel: "Jóvenes y Adultos"
-docente: "Staff CIArte"
+info_docente:
+  nombre: "Staff CIArte"
+  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
+  foto: ""
 activo: true
 orden: 3
 galeria: []
