@@ -1,20 +1,22 @@
 ---
 titulo: Taller De Tango
-descripcion: Aprendé a bailar tango, conectá con el abrazo y la música
-  ciudadana. Clases para principiantes y avanzados.
-imagen: ../../assets/images/clases-tango3.png
-flyer: ../../assets/images/clases-tango.png
+activo: true
+orden: 3
 horarios: Miércoles 20:00
 edadNivel: Jóvenes y Adultos
 categorias:
   - Danza
-galeria:
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-activo: true
-orden: 3
 docente: docente-de-tango
+imagen: ../../assets/images/clases-tango3.png
+flyer: ../../assets/images/clases-tango.png
+galeria:
+  - ../../assets/images/clases-tango.png
+  - ../../assets/images/clases-tango.png
+  - ../../assets/images/clases-tango.png
+descripcion: Aprendé a bailar tango, conectá con el abrazo y la música
+  ciudadana. Clases para principiantes y avanzados.
+meta_description: Clases de tango en General Güemes, Salta. Aprende a bailar
+  tango en CIArte - El Laberinto. Principiantes y avanzados.
 ---
 
 ## Clases de Tango Danza

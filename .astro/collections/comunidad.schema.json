@@ -31,17 +31,7 @@
         },
         "tipo": {
           "type": "string",
-          "enum": [
-            "encuentro",
-            "jornada",
-            "mural",
-            "celebracion",
-            "obra",
-            "integrantes",
-            "trayectoria",
-            "otro"
-          ],
-          "default": "otro"
+          "default": "encuentros"
         },
         "destacado": {
           "type": "boolean",

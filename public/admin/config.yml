@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-# Flujo editorial (funciona en Netlify, ignorado en local)
-publish_mode: editorial_workflow
+# Flujo editorial (Desactivado para desarrollo local: los cambios se guardan directo)
+# publish_mode: editorial_workflow
 
 # Configuración para desarrollo local (usar npx decap-server)
 local_backend: true
@@ -17,7 +17,29 @@ locale: 'es'
 
 # Colecciones
 collections:
-  # ===== TALLERES =====
+  # ===== 1. AGENDA CULTURAL (PRIORIDAD ALTA: EVENTOS PRÓXIMOS) =====
+  - name: "agenda"
+    label: "Agenda Cultural"
+    label_singular: "Evento"
+    folder: "src/content/agenda"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    sortable_fields: ['fecha', 'titulo']
+    summary: "{{titulo}} - 📅 {{fecha | date('DD/MM/YYYY HH:mm')}}"
+    fields:
+      - { label: "Título del Evento", name: "titulo", widget: "string", hint: "Nombre del evento que aparecerá en la agenda" }
+      - { label: "Fecha y Hora", name: "fecha", widget: "datetime", format: "YYYY-MM-DD HH:mm", hint: "Fecha y hora de inicio del evento" }
+      - { label: "Estado Actual", name: "estado", widget: "select", options: ["Próximamente", "En Curso", "Finalizado", "Suspendido"], default: "Próximamente", hint: "Cambia a 'Finalizado' para que desaparezca de la agenda principal" }
+      - { label: "Flyer / Imagen", name: "imagen", widget: "image", hint: "Formato vertical recomendado. Tamaño: 800x1200px" }
+      - { label: "Descripción Corta", name: "descripcion", widget: "text", hint: "Resumen del evento para mostrar en tarjetas y redes" }
+      - { label: "Lugar", name: "lugar", widget: "string", default: "CIArte - El Laberinto", hint: "Ubicación donde se realiza el evento" }
+      - { label: "Precio / Entrada", name: "precio", widget: "string", required: false, hint: "Ej: $5000, Gratis, A la gorra. Dejar vacío si no aplica" }
+      - { label: "WhatsApp Venta Entradas", name: "whatsapp_ventas", widget: "string", required: false, default: "543874535157", hint: "Número para entradas (12 dígitos AR). Puedes cambiarlo", pattern: ['^54[0-9]{10}$', "Debe ser número argentino: 54 + 10 dígitos. Ej: 543874123456"] }
+      - { label: "Texto Botón Compra", name: "texto_boton", widget: "string", default: "Comprar Entrada Ya", hint: "Texto que aparece en el botón de acción" }
+
+  # ===== 2. TALLERES (GESTIÓN CORE) =====
   - name: "talleres"
     label: "Talleres"
     label_singular: "Taller"
@@ -36,80 +58,70 @@ collections:
         pattern: false
     summary: "{{titulo}} ({{horarios}})"
     fields:
-      - { label: "Título", name: "titulo", widget: "string" }
-      - { label: "Descripción corta", name: "descripcion", widget: "text", required: true, hint: "Aparece en la tarjeta del taller" }
-      - { label: "Imagen Principal (Horizontal)", name: "imagen", widget: "image", required: true, hint: "Para la tarjeta en la lista de talleres" }
-      - { label: "Flyer (Vertical)", name: "flyer", widget: "image", required: true, hint: "Aparece en la página individual. Si no hay, usa la principal." }
-      - { label: "Horarios", name: "horarios", widget: "string", hint: "Ej: Sábados 10:00 a 12:00" }
-      - { label: "Edad / Nivel", name: "edadNivel", widget: "string", hint: "Ej: Todas las edades, Adultos, etc." }
-      - { label: "Categorías", name: "categorias", widget: "select", multiple: true, options: ["Música", "Danza", "Teatro", "Artes Visuales", "Bienestar"], default: ["Música"] }
-      - { label: "WhatsApp Inscripción (Opcional)", name: "whatsapp_custom", widget: "string", required: false, hint: "Si se deja vacío, usa el número general del sitio.", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
+      # --- INFO BÁSICA Y ESTADO ---
+      - { label: "Título del Taller", name: "titulo", widget: "string", hint: "Nombre del taller que aparece en tarjeta y encabezado" }
+      - { label: "Activo / Visible", name: "activo", widget: "boolean", default: true, hint: "¿Mostrar este taller en la web?" }
+      - { label: "Orden de Aparición", name: "orden", widget: "number", default: 0, hint: "0 = primero. Úsalo para organizar la fila de talleres" }
       
+      # --- DETALLES OPERATIVOS ---
+      - { label: "Horarios", name: "horarios", widget: "string", hint: "Ej: Sábados 10:00 a 12:00", default: "Consultar horarios" }
+      - { label: "Edad / Nivel", name: "edadNivel", widget: "string", hint: "Ej: Todas las edades, Adultos, Niños 6-12 años", default: "Todas las edades" }
+      - { label: "Categorías", name: "categorias", widget: "select", multiple: true, options: ["Música", "Danza", "Teatro", "Artes Visuales", "Bienestar"], default: ["Teatro"], hint: "Selecciona una o más categorías" }
+      - { label: "WhatsApp Inscripción", name: "whatsapp_custom", widget: "string", required: false, default: "543874535157", hint: "Número para inscripciones (12 dígitos AR). Puedes cambiarlo para cada taller", pattern: ['^54[0-9]{10}$', "Debe ser número argentino: 54 + 10 dígitos. Ej: 543874123456"] }
       - { label: "Docente a Cargo", name: "docente", widget: "relation", collection: "docentes", search_fields: ["nombre"], value_field: "{{slug}}", display_fields: ["nombre"], required: true }
+
+      # --- IMÁGENES Y MULTIMEDIA ---
+      - { label: "Imagen Principal (Horizontal)", name: "imagen", widget: "image", required: true, hint: "Formato 16:9 (Tarjeta). Tamaño recomendado: 1200x675px" }
+      - { label: "Flyer Detalle (Vertical)", name: "flyer", widget: "image", required: true, hint: "Formato vertical. Aparece al abrir el taller. Tamaño recomendado: 800x1200px" }
+      - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false, hint: "Fotos de las clases o presentaciones" }
       
-      - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false }
-      
-      - { label: "Activo", name: "activo", widget: "boolean", default: true }
-      - { label: "Orden", name: "orden", widget: "number", default: 0, hint: "Orden de aparición (menor = primero)" }
-      - { label: "Contenido detallado", name: "body", widget: "markdown" }
+      # --- CONTENIDO Y SEO ---
+      - { label: "Descripción Corta", name: "descripcion", widget: "text", required: true, hint: "Resumen para la tarjeta (Máx 150 carac.)" }
+      - { label: "Contenido Detallado", name: "body", widget: "markdown", hint: "Explica de qué trata el taller, objetivos, etc." }
+      - { label: "Meta Descripción (SEO)", name: "meta_description", widget: "text", required: false, hint: "Descripción para Google. Si está vacío, usa la descripción corta." }
 
-  # ===== AGENDA CULTURAL =====
-  - name: "agenda"
-    label: "Agenda Cultural"
-    label_singular: "Evento"
-    folder: "src/content/agenda"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    sortable_fields: ['fecha', 'titulo']
-    summary: "{{titulo}} - 📅 {{fecha | date('DD/MM/YYYY HH:mm')}}"
-    fields:
-      - { label: "Título del Evento", name: "titulo", widget: "string" }
-      - { label: "Fecha y Hora", name: "fecha", widget: "datetime", format: "YYYY-MM-DD HH:mm" }
-      - { label: "Flyer / Imagen", name: "imagen", widget: "image" }
-      - { label: "Descripción Corta", name: "descripcion", widget: "text" }
-      - { label: "Lugar", name: "lugar", widget: "string", default: "CIArte - El Laberinto" }
-      - { label: "Precio / Entrada", name: "precio", widget: "string", required: false, hint: "Ej: $5000, Gratis, A la gorra" }
-      - { label: "Estado", name: "estado", widget: "select", options: ["Próximamente", "En Curso", "Finalizado", "Suspendido"], default: "Próximamente" }
-      - { label: "WhatsApp Venta Entradas (Opcional)", name: "whatsapp_ventas", widget: "string", required: false, hint: "Si se deja vacío, usa el número general.", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
-      - { label: "Texto Botón Compra", name: "texto_boton", widget: "string", default: "Comprar Entrada Ya" }
-
-
-  # ===== COMUNIDAD =====
+  # ===== 3. COMUNIDAD (VIDA INSTITUCIONAL) =====
   - name: "comunidad"
     label: "Comunidad"
-    label_singular: "Actividad Comunitaria"
+    label_singular: "Actividad"
     folder: "src/content/comunidad"
     create: true
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
     sortable_fields: ['fecha', 'titulo', 'tipo']
-    summary: "{{titulo}} [{{tipo}}]"
+    view_filters:
+      - label: Destacados (Home)
+        field: destacado
+        pattern: true
+      - label: No destacados
+        field: destacado
+        pattern: false
+    summary: "{{titulo}} ({{tipo}})"
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Destacado", name: "destacado", widget: "boolean", default: false, hint: "¿Mostrar en la sección Comunidad de la Home?" }
+      - label: "Tipo de actividad"
+        name: "tipo"
+        widget: "select"
+        allow_add: true
+        options:
+          - { label: "Encuentros", value: "encuentros" }
+          - { label: "Jornadas", value: "jornadas" }
+          - { label: "Arte Público", value: "arte-publico" }
+          - { label: "Celebraciones", value: "celebraciones" }
+          - { label: "Obras", value: "obras" }
+          - { label: "Integrantes", value: "integrantes" }
+          - { label: "Trayectoria", value: "trayectoria" }
+          - { label: "Otro", value: "otro" }
+        default: "encuentros"
       - { label: "Descripción", name: "descripcion", widget: "text" }
       - { label: "Imagen Principal", name: "imagen", widget: "image", required: false }
       - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false }
       - { label: "Fecha", name: "fecha", widget: "datetime", required: false }
-      - label: "Tipo de actividad"
-        name: "tipo"
-        widget: "select"
-        options:
-          - { label: "Encuentro", value: "encuentro" }
-          - { label: "Jornada", value: "jornada" }
-          - { label: "Mural", value: "mural" }
-          - { label: "Celebración", value: "celebracion" }
-          - { label: "Obra", value: "obra" }
-          - { label: "Integrantes", value: "integrantes" }
-          - { label: "Trayectoria", value: "trayectoria" }
-          - { label: "Otro", value: "otro" }
-        default: "encuentro"
-      - { label: "Destacado", name: "destacado", widget: "boolean", default: false }
       - { label: "Contenido", name: "body", widget: "markdown" }
 
-  # ===== DOCENTES =====
+  # ===== 4. DOCENTES =====
   - name: "docentes"
     label: "Docentes"
     label_singular: "Docente"
@@ -119,11 +131,11 @@ collections:
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "Nombre", name: "nombre", widget: "string" }
-      - { label: "Biografía", name: "bio", widget: "text" }
-      - { label: "Foto", name: "foto", widget: "image", required: false }
+      - { label: "Nombre Completo", name: "nombre", widget: "string", hint: "Nombre y apellido del docente" }
+      - { label: "Biografía", name: "bio", widget: "text", hint: "Trayectoria y formación del docente" }
+      - { label: "Foto de Perfil", name: "foto", widget: "image", required: false, hint: "Formato cuadrado 400x400px recomendado" }
 
-  # ===== CONFIGURACIÓN DEL SITIO =====
+  # ===== 5. CONFIGURACIÓN DEL SITIO (FOOTER, HEADER, HOME) =====
   - name: "settings"
     label: "Configuración Global"
     files:
@@ -132,7 +144,7 @@ collections:
         file: "src/content/settings/site.json"
         fields:
           - { label: "Nombre del espacio", name: "nombre", widget: "string", default: "CIArte – El Laberinto" }
-          - { label: "Teléfono WhatsApp (General)", name: "whatsapp", widget: "string", default: "543874535157", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
+          - { label: "Teléfono WhatsApp (General)", name: "whatsapp", widget: "string", default: "543874535157", hint: "Número principal de contacto (12 dígitos AR)", pattern: ['^54[0-9]{10}$', "Debe ser número argentino: 54 + 10 dígitos. Ej: 543874123456"] }
           - { label: "Email", name: "email", widget: "string", pattern: ['^.+@.+\..+$', "Ingrese un email válido"] }
           - { label: "Dirección", name: "direccion", widget: "string" }
           - { label: "Link Google Maps", name: "maps_link", widget: "string", pattern: ['^https?://.+', "Debe ser una URL válida (empezar con http:// o https://)"] }

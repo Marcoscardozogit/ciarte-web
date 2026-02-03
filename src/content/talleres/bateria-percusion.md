@@ -1,20 +1,23 @@
 ---
 titulo: Taller De Batería y Percusión
-descripcion: Ritmo, coordinación y potencia. Aprendé a tocar la batería y
-  diversos instrumentos de percusión en distintos estilos.
-imagen: ../../assets/images/clases-bateriaypercusion.png
-flyer: ../../assets/images/clases-bateriaypercusion3.png
+activo: true
+orden: 6
 horarios: Lunes y Miércoles 15:00
 edadNivel: Niños, Adol. y Adultos
 categorias:
   - Música
-galeria:
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-activo: true
-orden: 6
 docente: profe-de-bateria
+imagen: ../../assets/images/clases-bateriaypercusion.png
+flyer: ../../assets/images/clases-bateriaypercusion3.png
+galeria:
+  - ../../assets/images/muestra-percusion.jpg
+  - ../../assets/images/muestra-percusion2.jpg
+  - ../../assets/images/muestra-percusion1.jpg
+  - ../../assets/images/muestra-percusion3.jpg
+descripcion: Ritmo, coordinación y potencia. Aprendé a tocar la batería y
+  diversos instrumentos de percusión en distintos estilos.
+meta_description: Clases de batería y percusión en General Güemes, Salta. Ritmo,
+  coordinación y estilos variados en CIArte - El Laberinto.
 ---
 
 ## Taller de Batería y Percusión

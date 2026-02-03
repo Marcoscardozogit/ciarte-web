@@ -3,8 +3,10 @@
  * Reset y estilos base utilizando tokens de diseño
  */
 
+/* Fuentes con font-display: swap para mejor rendimiento */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 @import './tokens.css';
+@import './animations.css';
 
 /* ===== CSS RESET ===== */
 *,

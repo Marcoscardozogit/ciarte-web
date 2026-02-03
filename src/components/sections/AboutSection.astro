@@ -3,7 +3,10 @@ import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
 
 const home = await getEntry("home", "content");
-const { about } = home.data;
+if (!home) {
+  throw new Error("No se encontró el contenido de home/content.md");
+}
+const about = home.data?.about || {};
 const { Content } = await home.render();
 ---
 

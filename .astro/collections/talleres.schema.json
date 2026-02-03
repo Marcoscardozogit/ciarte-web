@@ -112,6 +112,9 @@
           "type": "number",
           "default": 0
         },
+        "meta_description": {
+          "type": "string"
+        },
         "galeria": {
           "anyOf": [
             {

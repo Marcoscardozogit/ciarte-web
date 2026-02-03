@@ -1,20 +1,23 @@
 ---
 titulo: Taller De Yoga
-descripcion: Bienestar para cuerpo y mente. Clases de Hatha Yoga para mejorar la
-  flexibilidad, la respiración y encontrar el equilibrio.
-imagen: ../../assets/images/clases-yoga.png
-flyer: ../../assets/images/clases-yoga3.png
+activo: true
+orden: 10
 horarios: Martes y Jueves 15:00
 edadNivel: Todas las edades
 categorias:
   - Bienestar
-galeria:
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-activo: true
-orden: 10
 docente: profe-de-yoga
+imagen: ../../assets/images/clases-yoga.png
+flyer: ../../assets/images/clases-yoga3.png
+galeria:
+  - ../../assets/images/clases-yoga3.png
+  - ../../assets/images/clases-yoga3.png
+  - ../../assets/images/clases-yoga3.png
+descripcion: Bienestar para cuerpo y mente. Clases de Hatha Yoga para mejorar la
+  flexibilidad, la respiración y encontrar el equilibrio.
+meta_description: Clases de Yoga en General Güemes, Salta. Hatha Yoga para
+  bienestar, flexibilidad y relajación en CIArte - El Laberinto. Todas las
+  edades.
 ---
 
 ## Taller de Yoga

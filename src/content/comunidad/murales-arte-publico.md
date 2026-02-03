@@ -3,7 +3,7 @@ titulo: "Murales y Arte Público"
 descripcion: "Embelleciendo nuestro entorno y contando nuestra historia a través de murales participativos."
 imagen: "../../assets/images/remodelacion-terminada.jpg"
 fecha: 2024-11-15
-tipo: "mural"
+tipo: "arte-publico"
 destacado: true
 orden: 4
 galeria:

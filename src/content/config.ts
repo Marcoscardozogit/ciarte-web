@@ -28,6 +28,7 @@ const talleresCollection = defineCollection({
 
         activo: z.boolean().default(true),
         orden: z.number().default(0),
+        meta_description: z.string().optional(),
         galeria: z.array(z.object({
             image: image(),
             alt: z.string().optional()
@@ -53,7 +54,7 @@ const comunidadCollection = defineCollection({
         descripcion: z.string(),
         imagen: image().optional(),
         fecha: z.coerce.date().optional(),
-        tipo: z.enum(['encuentro', 'jornada', 'mural', 'celebracion', 'obra', 'integrantes', 'trayectoria', 'otro']).default('otro'),
+        tipo: z.string().default('encuentros'),
         destacado: z.boolean().default(false),
         orden: z.number().default(99),
         galeria: z.array(z.object({

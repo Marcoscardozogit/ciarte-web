@@ -31,6 +31,25 @@
   <script>
     // Registrar estilos para el interior del iframe de previsualización
     CMS.registerPreviewStyle("/admin/preview.css");
+
+    // Solución para el problema de "Reactividad" en el Local Backend
+    // Forzamos una recarga o redirección al guardar para que la lista se actualice
+    CMS.registerEventListener({
+      name: 'prePublish',
+      handler: ({ entry }) => {
+        console.log("Guardado detectado, preparando actualización de lista...");
+        // Pequeño truco: después de guardar, esperamos un momento y volvemos a la lista
+        // Esto asegura que el Redux store del CMS se limpie y cargue los nuevos datos
+        setTimeout(() => {
+          const collection = entry.get('collection');
+          if (collection) {
+            window.location.hash = `#/collections/${collection}`;
+            // Forzamos un refresh si estamos en local para evitar cache persistente
+            window.location.reload();
+          }
+        }, 500);
+      },
+    });
   </script>
 </body>
 

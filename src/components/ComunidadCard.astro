@@ -15,9 +15,22 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
   month: "long",
   year: "numeric"
 }) : null;
+
+// Map de etiquetas legibles
+const labels: Record<string, string> = {
+    "encuentros": "Encuentros",
+    "jornadas": "Jornadas",
+    "arte-publico": "Arte Público",
+    "celebraciones": "Celebraciones",
+    "obras": "Obras",
+    "integrantes": "Integrantes",
+    "trayectoria": "Trayectoria",
+    "otro": "Otro"
+};
+const displayLabel = labels[data.tipo] || data.tipo;
 ---
 
-<article class="card comunidad-card">
+<article class="card comunidad-card reveal">
   <div class="card-image">
     {data.imagen ? (
       <Image src={data.imagen} alt={data.titulo} />
@@ -29,7 +42,7 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
   </div>
   <div class="card-content">
     <div class="card-header">
-      <span class={`badge type-${data.tipo}`}>{data.tipo}</span>
+      <span class={`badge type-${data.tipo}`}>{displayLabel}</span>
       {fecha && <span class="date">{fecha}</span>}
     </div>
     <h3 class="card-title">{data.titulo}</h3>
@@ -103,13 +116,13 @@ const fecha = data.fecha ? new Date(data.fecha).toLocaleDateString("es-AR", {
     color: var(--color-text-secondary);
   }
 
-  .badge.type-encuentro { background-color: var(--color-primary-800); color: var(--color-primary-100); }
-  .badge.type-mural { background-color: var(--color-accent-700); color: var(--color-accent-50); }
-  .badge.type-celebracion { background-color: var(--color-accent-500); color: var(--color-neutral-900); }
-  .badge.type-jornada { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
-  .badge.type-obra { background-color: var(--color-primary-600); color: var(--color-primary-50); }
-  .badge.type-integrantes { background-color: var(--color-neutral-600); color: var(--color-neutral-100); }
-  .badge.type-trayectoria { background-color: var(--color-accent-400); color: var(--color-neutral-900); }
+  .badge.type-encuentro, .badge.type-encuentros { background-color: var(--color-primary-600); color: white; }
+  .badge.type-mural, .badge.type-arte-publico { background-color: var(--color-accent-700); color: white; }
+  .badge.type-celebracion, .badge.type-celebraciones { background-color: #8b5cf6; color: white; } /* Violeta para celebraciones */
+  .badge.type-jornada, .badge.type-jornadas { background-color: var(--color-neutral-700); color: white; }
+  .badge.type-obra, .badge.type-obras { background-color: var(--color-primary-800); color: white; border: 1px solid var(--color-accent-400); }
+  .badge.type-integrantes { background-color: var(--color-neutral-600); color: white; }
+  .badge.type-trayectoria { background-color: var(--color-accent-600); color: white; }
 
   .date {
     font-size: var(--font-size-xs);

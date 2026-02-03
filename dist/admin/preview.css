@@ -1,0 +1,20 @@
+/* Estilos para la previsualización del CMS */
+body {
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 20px;
+}

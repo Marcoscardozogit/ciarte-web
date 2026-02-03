@@ -8,10 +8,7 @@ import GallerySection from '../components/sections/GallerySection.astro';
 import TallerCard from '../components/TallerCard.astro';
 import ComunidadCard from '../components/ComunidadCard.astro';
 import { getCollection } from 'astro:content';
-
-// Import images
-// Import images no longer needed directly here
-
+import siteSettings from '../content/settings/site.json';
 
 // Obtener datos
 const talleres = (await getCollection('talleres'))
@@ -20,6 +17,13 @@ const talleres = (await getCollection('talleres'))
 const comunidad = (await getCollection('comunidad'))
   .filter(item => item.data.destacado)
   .sort((a, b) => a.data.orden - b.data.orden);
+
+// Obtener eventos próximos para Schema dinámico
+const ahora = new Date();
+const eventosProximos = (await getCollection('agenda'))
+  .filter(evento => new Date(evento.data.fecha) > ahora && evento.data.estado !== 'Finalizado' && evento.data.estado !== 'Suspendido')
+  .sort((a, b) => new Date(a.data.fecha).getTime() - new Date(b.data.fecha).getTime())
+  .slice(0, 5); // Máximo 5 eventos para Schema
 ---
 
 <Layout title="CIArte – El Laberinto | Espacio de Arte Comunitario">
@@ -30,12 +34,14 @@ const comunidad = (await getCollection('comunidad'))
     <AboutSection />
 
     <!-- SECCIÓN AGENDA -->
-    <AgendaSection />
+    <section class="reveal">
+      <AgendaSection />
+    </section>
 
 
 
     <!-- SECCIÓN TALLERES -->
-    <section class="section bg-light" id="talleres">
+    <section class="section bg-light reveal" id="talleres">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Nuestros Talleres</h2>
@@ -53,7 +59,7 @@ const comunidad = (await getCollection('comunidad'))
     </section>
 
     <!-- SECCIÓN COMUNIDAD / AGENDA -->
-    <section class="section" id="comunidad">
+    <section class="section reveal" id="comunidad">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Vida Comunitaria</h2>
@@ -71,66 +77,50 @@ const comunidad = (await getCollection('comunidad'))
     </section>
 
     <!-- SECCIÓN GALERÍA -->
-    <GallerySection />
+    <section class="reveal">
+      <GallerySection />
+    </section>
 
-    <ContactSection />
+    <div class="reveal">
+      <ContactSection />
+    </div>
   </main>
   
-  <script type="application/ld+json" is:inline set:html={JSON.stringify([
-    {
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(
+    eventosProximos.length > 0 ? eventosProximos.map(evento => ({
       "@context": "https://schema.org",
       "@type": "Event",
-      "name": "Visita Especial",
-      "startDate": "2026-02-20T20:00:00-03:00",
-      "eventStatus": "https://schema.org/EventScheduled",
+      "name": evento.data.titulo,
+      "startDate": new Date(evento.data.fecha).toISOString(),
+      "eventStatus": evento.data.estado === 'Suspendido' 
+        ? "https://schema.org/EventCancelled" 
+        : "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "location": {
         "@type": "Place",
-        "name": "CIArte",
+        "name": evento.data.lugar || "CIArte - El Laberinto",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "General Güemes",
-          "addressLocality": "Salta",
+          "streetAddress": siteSettings.direccion,
+          "addressLocality": "General Güemes",
+          "addressRegion": "Salta",
           "addressCountry": "AR"
         }
       },
-      "description": "Un encuentro único con referentes de la cultura."
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "Muestra de Percusión",
-      "startDate": "2026-02-20T19:00:00-03:00",
-      "location": {
-        "@type": "Place",
-        "name": "CIArte",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "General Güemes",
-          "addressLocality": "Salta",
-          "addressCountry": "AR"
-        }
+      "description": evento.data.descripcion,
+      "organizer": {
+        "@type": "Organization",
+        "name": "CIArte – El Laberinto",
+        "url": "https://ciarte-ellaberinto.netlify.app"
       },
-      "description": "Todo el ritmo y la energía de nuestros alumnos en escena."
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "TheaterEvent",
-      "name": "Función Teatral",
-      "startDate": "2026-02-20T21:00:00-03:00",
-      "location": {
-        "@type": "Place",
-        "name": "CIArte",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "General Güemes",
-          "addressLocality": "Salta",
-          "addressCountry": "AR"
-        }
-      },
-      "description": "Nueva obra del grupo El Laberinto."
-    }
-  ])} />
+      "offers": evento.data.precio ? {
+        "@type": "Offer",
+        "price": evento.data.precio,
+        "priceCurrency": "ARS",
+        "availability": "https://schema.org/InStock"
+      } : undefined
+    })) : []
+  )} />
 </Layout>
 
 <style>

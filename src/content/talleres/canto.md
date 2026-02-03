@@ -1,20 +1,22 @@
 ---
 titulo: Taller De Canto
-descripcion: Descubrí tu propia voz. Técnica vocal, respiración e interpretación
-  para cantar con salud y expresividad.
-imagen: ../../assets/images/clases-canto1.png
-flyer: ../../assets/images/clases-canto3.png
+activo: true
+orden: 9
 horarios: Lunes 20:00
 edadNivel: Jóvenes y Adultos
 categorias:
   - Música
-galeria:
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-  - ../../assets/images/hero-bg.jpg
-activo: true
-orden: 9
 docente: profe-de-canto
+imagen: ../../assets/images/clases-canto1.png
+flyer: ../../assets/images/clases-canto3.png
+galeria:
+  - ../../assets/images/evento-comunidad17.jpg
+  - ../../assets/images/comunidad4.jpg
+  - ../../assets/images/evento-comunidad17.jpg
+descripcion: Descubrí tu propia voz. Técnica vocal, respiración e interpretación
+  para cantar con salud y expresividad.
+meta_description: Clases de canto en General Güemes, Salta. Técnica vocal,
+  respiración e interpretación en CIArte - El Laberinto. Jóvenes y adultos.
 ---
 
 ## Taller de Canto

@@ -1,18 +1,23 @@
 ---
 titulo: Taller De Interpretación Escénica
-descripcion: Taller para cantantes. Potenciá tu presencia en el escenario y
-  conectá profundamente con tu interpretación.
-imagen: ../../assets/images/clases-interpretacionescenica1.png
-flyer: ../../assets/images/clases-interpretacionescenica.png
+activo: true
+orden: 3
 horarios: Martes 15:00 a 18:00
 edadNivel: Jóvenes y Adultos
 categorias:
   - Teatro
   - Música
 docente: staff-ciarte
-galeria: []
-activo: true
-orden: 3
+imagen: ../../assets/images/clases-interpretacionescenica1.png
+flyer: ../../assets/images/clases-interpretacionescenica.png
+galeria:
+  - ../../assets/images/clases-interpretacionescenica.png
+  - ../../assets/images/clases-interpretacionescenica.png
+  - ../../assets/images/clases-interpretacionescenica.png
+descripcion: Taller para cantantes. Potenciá tu presencia en el escenario y
+  conectá profundamente con tu interpretación.
+meta_description: Taller de interpretación escénica para cantantes en General
+  Güemes, Salta. Presencia escénica y expresión en CIArte - El Laberinto.
 ---
 
 ## Taller de Interpretación Escénica para Cantantes

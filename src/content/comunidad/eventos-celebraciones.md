@@ -3,7 +3,7 @@ titulo: "Eventos y Celebraciones"
 descripcion: "Celebraciones colectivas que marcan nuestro calendario anual, desde el Inti Raymi hasta aniversarios."
 imagen: "../../assets/images/comunidad5.jpg"
 fecha: 2025-06-21
-tipo: "celebracion"
+tipo: "celebraciones"
 destacado: true
 orden: 3
 galeria:

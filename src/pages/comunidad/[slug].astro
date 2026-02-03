@@ -18,14 +18,15 @@ const { Content } = await actividad.render();
 
 // Navegación específica para comunidad (volver a Inicio)
 const comunidadNavItems = [
-  { label: 'Inicio', href: '/' },
   { label: 'Volver', href: '/#comunidad' },
+  { label: 'Descripción', href: '#descripcion' },
+  { label: 'Galería', href: '#galeria' },
 ];
 
 const bgImage = actividad.data.imagen?.src || defaultImage.src;
 ---
 
-<Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} navItems={comunidadNavItems}>
+<Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} image={bgImage} navItems={comunidadNavItems}>
   <article class="comunidad-detail">
     <header class="comunidad-header">
       <div class="header-bg" style={`background-image: url(${bgImage})`}></div>
@@ -41,14 +42,14 @@ const bgImage = actividad.data.imagen?.src || defaultImage.src;
       </div>
     </header>
 
-    <div class="container content-container">
+    <div class="container content-container" id="descripcion">
       <div class="prose">
         <Content />
       </div>
     </div>
 
     {actividad.data.galeria && actividad.data.galeria.length > 0 && (
-      <div class="container gallery-container">
+      <div class="container gallery-container" id="galeria">
         <h2 class="gallery-title">Galería de Fotos</h2>
         <div class="gallery-grid">
           {actividad.data.galeria.map(item => {
@@ -56,7 +57,9 @@ const bgImage = actividad.data.imagen?.src || defaultImage.src;
              const alt = item.alt || `Imagen de ${actividad.data.titulo}`;
              return (
             <div class="gallery-item">
-              <Image src={img} alt={alt} />
+              <a href={img.src} data-lightbox data-caption={alt} aria-label="Ver imagen completa">
+                <Image src={img} alt={alt} />
+              </a>
             </div>
           )})}
         </div>
@@ -180,6 +183,13 @@ const bgImage = actividad.data.imagen?.src || defaultImage.src;
     overflow: hidden;
     aspect-ratio: 4/3;
     box-shadow: var(--shadow-md);
+  }
+
+  .gallery-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
   }
 
   .gallery-item img {
