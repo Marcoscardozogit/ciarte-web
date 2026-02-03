@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+# Flujo editorial (funciona en Netlify, ignorado en local)
+publish_mode: editorial_workflow
+
 # Configuración para desarrollo local (usar npx decap-server)
 local_backend: true
 
@@ -23,6 +26,15 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+    sortable_fields: ['titulo', 'orden', 'activo']
+    view_filters:
+      - label: Activos
+        field: activo
+        pattern: true
+      - label: Inactivos
+        field: activo
+        pattern: false
+    summary: "{{titulo}} ({{horarios}})"
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
       - { label: "Descripción corta", name: "descripcion", widget: "text", required: true, hint: "Aparece en la tarjeta del taller" }
@@ -30,15 +42,10 @@ collections:
       - { label: "Flyer (Vertical)", name: "flyer", widget: "image", required: true, hint: "Aparece en la página individual. Si no hay, usa la principal." }
       - { label: "Horarios", name: "horarios", widget: "string", hint: "Ej: Sábados 10:00 a 12:00" }
       - { label: "Edad / Nivel", name: "edadNivel", widget: "string", hint: "Ej: Todas las edades, Adultos, etc." }
-      - { label: "WhatsApp Inscripción (Opcional)", name: "whatsapp_custom", widget: "string", required: false, hint: "Si se deja vacío, usa el número general del sitio." }
+      - { label: "Categorías", name: "categorias", widget: "select", multiple: true, options: ["Música", "Danza", "Teatro", "Artes Visuales", "Bienestar"], default: ["Música"] }
+      - { label: "WhatsApp Inscripción (Opcional)", name: "whatsapp_custom", widget: "string", required: false, hint: "Si se deja vacío, usa el número general del sitio.", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
       
-      - label: "Información del Docente"
-        name: "info_docente"
-        widget: "object"
-        fields:
-          - { label: "Nombre del Docente", name: "nombre", widget: "string", required: true }
-          - { label: "Biografía Breve", name: "bio", widget: "text", required: true }
-          - { label: "Foto Docente", name: "foto", widget: "image", required: false }
+      - { label: "Docente a Cargo", name: "docente", widget: "relation", collection: "docentes", search_fields: ["nombre"], value_field: "{{slug}}", display_fields: ["nombre"], required: true }
       
       - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false }
       
@@ -55,12 +62,17 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     extension: "md"
     format: "frontmatter"
+    sortable_fields: ['fecha', 'titulo']
+    summary: "{{titulo}} - 📅 {{fecha | date('DD/MM/YYYY HH:mm')}}"
     fields:
       - { label: "Título del Evento", name: "titulo", widget: "string" }
       - { label: "Fecha y Hora", name: "fecha", widget: "datetime", format: "YYYY-MM-DD HH:mm" }
       - { label: "Flyer / Imagen", name: "imagen", widget: "image" }
       - { label: "Descripción Corta", name: "descripcion", widget: "text" }
-      - { label: "WhatsApp Venta Entradas (Opcional)", name: "whatsapp_ventas", widget: "string", required: false, hint: "Si se deja vacío, usa el número general." }
+      - { label: "Lugar", name: "lugar", widget: "string", default: "CIArte - El Laberinto" }
+      - { label: "Precio / Entrada", name: "precio", widget: "string", required: false, hint: "Ej: $5000, Gratis, A la gorra" }
+      - { label: "Estado", name: "estado", widget: "select", options: ["Próximamente", "En Curso", "Finalizado", "Suspendido"], default: "Próximamente" }
+      - { label: "WhatsApp Venta Entradas (Opcional)", name: "whatsapp_ventas", widget: "string", required: false, hint: "Si se deja vacío, usa el número general.", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
       - { label: "Texto Botón Compra", name: "texto_boton", widget: "string", default: "Comprar Entrada Ya" }
 
 
@@ -73,6 +85,8 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+    sortable_fields: ['fecha', 'titulo', 'tipo']
+    summary: "{{titulo}} [{{tipo}}]"
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
@@ -95,6 +109,20 @@ collections:
       - { label: "Destacado", name: "destacado", widget: "boolean", default: false }
       - { label: "Contenido", name: "body", widget: "markdown" }
 
+  # ===== DOCENTES =====
+  - name: "docentes"
+    label: "Docentes"
+    label_singular: "Docente"
+    folder: "src/content/docentes"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Nombre", name: "nombre", widget: "string" }
+      - { label: "Biografía", name: "bio", widget: "text" }
+      - { label: "Foto", name: "foto", widget: "image", required: false }
+
   # ===== CONFIGURACIÓN DEL SITIO =====
   - name: "settings"
     label: "Configuración Global"
@@ -104,18 +132,19 @@ collections:
         file: "src/content/settings/site.json"
         fields:
           - { label: "Nombre del espacio", name: "nombre", widget: "string", default: "CIArte – El Laberinto" }
-          - { label: "Teléfono WhatsApp (General)", name: "whatsapp", widget: "string", default: "543874535157" }
-          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Teléfono WhatsApp (General)", name: "whatsapp", widget: "string", default: "543874535157", pattern: ['^[0-9]+$', "Solo ingresar números (sin espacios, ni guiones, ni +). Ej: 543874123456"] }
+          - { label: "Email", name: "email", widget: "string", pattern: ['^.+@.+\..+$', "Ingrese un email válido"] }
           - { label: "Dirección", name: "direccion", widget: "string" }
-          - { label: "Link Google Maps", name: "maps_link", widget: "string" }
-          - { label: "Facebook Page", name: "facebook", widget: "string" }
-          - { label: "Facebook Perfil", name: "facebook2", widget: "string" }
-          - { label: "Instagram", name: "instagram", widget: "string" }
+          - { label: "Link Google Maps", name: "maps_link", widget: "string", pattern: ['^https?://.+', "Debe ser una URL válida (empezar con http:// o https://)"] }
+          - { label: "Facebook Page", name: "facebook", widget: "string", pattern: ['^https?://.+', "Debe ser una URL válida (empezar con http:// o https://)"] }
+          - { label: "Facebook Perfil", name: "facebook2", widget: "string", pattern: ['^https?://.+', "Debe ser una URL válida (empezar con http:// o https://)"] }
+          - { label: "Instagram", name: "instagram", widget: "string", hint: "Solo el usuario, sin @", pattern: ['^[a-zA-Z0-9._]+$', "Solo el nombre de usuario (sin @ ni url)"] }
 
       - label: "Contenido Home (Qué es CIArte)"
         name: "home_content"
         file: "src/content/home/content.md"
         fields:
+          - { label: "Imagen Portada (Hero)", name: "hero_image", widget: "image", required: false }
           - label: "Sección: Qué es CIArte"
             name: "about"
             widget: "object"

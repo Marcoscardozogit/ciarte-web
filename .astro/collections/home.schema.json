@@ -4,13 +4,26 @@
     "home": {
       "type": "object",
       "properties": {
+        "hero_image": {
+          "type": "string"
+        },
         "about": {
           "type": "object",
           "properties": {
+            "title": {
+              "type": "string"
+            },
+            "lead": {
+              "type": "string"
+            },
             "image": {
               "type": "string"
             }
           },
+          "required": [
+            "title",
+            "lead"
+          ],
           "additionalProperties": false
         },
         "home_gallery": {

@@ -2,7 +2,7 @@
  * Configuración de Content Collections para CIArte
  * Colecciones: talleres, comunidad, agenda
  */
-import { z, defineCollection } from 'astro:content';
+import { z, defineCollection, reference } from 'astro:content';
 
 // Colección de Talleres
 const talleresCollection = defineCollection({
@@ -14,16 +14,17 @@ const talleresCollection = defineCollection({
         flyer: image(), // Vertical
         horarios: z.string(),
         edadNivel: z.string(),
-
-        // Info Docente
-        info_docente: z.object({
-            nombre: z.string(),
-            bio: z.string(),
-            foto: image().optional()
-        }).optional(),
+        categorias: z.array(z.enum(['Música', 'Danza', 'Teatro', 'Artes Visuales', 'Bienestar'])).default(['Música']),
+        // Info Docente (Opcionales para compatibilidad durante migración)
+        docente_nombre: z.string().optional(),
+        docente_bio: z.string().optional(),
+        docente_foto: image().optional().or(z.literal("").transform(() => undefined)),
 
         // Contacto Específico
         whatsapp_custom: z.string().optional(),
+
+        // Relación con Docentes
+        docente: reference('docentes').optional(),
 
         activo: z.boolean().default(true),
         orden: z.number().default(0),
@@ -31,6 +32,16 @@ const talleresCollection = defineCollection({
             image: image(),
             alt: z.string().optional()
         })).optional().or(z.array(image()).optional()), // Support both object list (CMS) and simple image list (Legacy)
+    }),
+});
+
+// Colección de Docentes
+const docentesCollection = defineCollection({
+    type: 'content',
+    schema: ({ image }) => z.object({
+        nombre: z.string(),
+        bio: z.string(),
+        foto: image().optional(),
     }),
 });
 
@@ -60,6 +71,9 @@ const agendaCollection = defineCollection({
         fecha: z.coerce.date(),
         imagen: image(),
         descripcion: z.string(),
+        lugar: z.string().default('CIArte - El Laberinto'),
+        precio: z.string().optional(),
+        estado: z.enum(['Próximamente', 'En Curso', 'Finalizado', 'Suspendido']).default('Próximamente'),
         whatsapp_ventas: z.string().optional(),
         texto_boton: z.string().default('Comprar Entrada Ya'),
     }),
@@ -69,7 +83,10 @@ const agendaCollection = defineCollection({
 const homeCollection = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
+        hero_image: image().optional(),
         about: z.object({
+            title: z.string(),
+            lead: z.string(),
             image: image().optional(),
         }),
         home_gallery: z.array(z.object({
@@ -96,6 +113,7 @@ const settingsCollection = defineCollection({
 
 export const collections = {
     talleres: talleresCollection,
+    docentes: docentesCollection,
     comunidad: comunidadCollection,
     agenda: agendaCollection,
     home: homeCollection,

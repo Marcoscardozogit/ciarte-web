@@ -29,6 +29,23 @@
         "descripcion": {
           "type": "string"
         },
+        "lugar": {
+          "type": "string",
+          "default": "CIArte - El Laberinto"
+        },
+        "precio": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string",
+          "enum": [
+            "Próximamente",
+            "En Curso",
+            "Finalizado",
+            "Suspendido"
+          ],
+          "default": "Próximamente"
+        },
         "whatsapp_ventas": {
           "type": "string"
         },

@@ -1,13 +1,16 @@
 ---
-import WhatsAppButton from './WhatsAppButton.astro';
+import { getEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
-import heroImage from '../assets/images/integrantes5.jpg';
+import defaultHeroImage from '../assets/images/integrantes5.jpg';
 
-const optimizedHero = await getImage({src: heroImage, format: 'webp', quality: 90});
+const home = await getEntry('home', 'content');
+const heroImageSource = home?.data?.hero_image || defaultHeroImage;
+
+const optimizedHero = await getImage({src: heroImageSource, format: 'webp', quality: 90});
 const heroUrl = `url(${optimizedHero.src})`;
 ---
 
-<section class="hero-section" id="inicio">
+<section class="hero-section" id="inicio" style={`background-image: ${heroUrl}`}>
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <h1 class="hero-title">
@@ -24,7 +27,7 @@ const heroUrl = `url(${optimizedHero.src})`;
   </div>
 </section>
 
-<style define:vars={{ heroUrl }}>
+<style>
   .hero-section {
     position: relative;
     height: 90vh;
@@ -33,7 +36,6 @@ const heroUrl = `url(${optimizedHero.src})`;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: var(--heroUrl);
     background-size: cover;
     background-position: center;
     color: white;

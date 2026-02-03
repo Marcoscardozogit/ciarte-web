@@ -1,20 +1,20 @@
 ---
-titulo: "Canto"
-descripcion: "Descubrí tu propia voz. Técnica vocal, respiración e interpretación para cantar con salud y expresividad."
-imagen: "../../assets/images/clases-canto1.png"
-flyer: "../../assets/images/clases-canto3.png"
-horarios: "Lunes 20:00"
-edadNivel: "Jóvenes y Adultos"
-info_docente:
-  nombre: "Profe de Canto"
-  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
-  foto: ""
+titulo: Taller De Canto
+descripcion: Descubrí tu propia voz. Técnica vocal, respiración e interpretación
+  para cantar con salud y expresividad.
+imagen: ../../assets/images/clases-canto1.png
+flyer: ../../assets/images/clases-canto3.png
+horarios: Lunes 20:00
+edadNivel: Jóvenes y Adultos
+categorias:
+  - Música
+galeria:
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
 activo: true
 orden: 9
-galeria:
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
+docente: profe-de-canto
 ---
 
 ## Taller de Canto

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -8,6 +9,22 @@ interface Props {
 
 const { taller } = Astro.props;
 const { data, slug } = taller;
+
+// Resolver Nombre Docente
+let docenteNombre = data.docente_nombre;
+if (data.docente) {
+  const docenteEntry = await getEntry(data.docente);
+  if (docenteEntry) docenteNombre = docenteEntry.data.nombre;
+}
+
+// Helper para normalizar nombres de categorías a clases CSS
+const getCategoryClass = (cat: string) => {
+  return cat
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+};
 ---
 
 <article class="card taller-card">
@@ -22,6 +39,7 @@ const { data, slug } = taller;
   </div>
   <div class="card-content">
     <h3 class="card-title">{data.titulo}</h3>
+    
     <div class="card-meta">
       <span class="meta-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -31,13 +49,20 @@ const { data, slug } = taller;
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         {data.edadNivel}
       </span>
-      { data.info_docente?.nombre && (
+      { docenteNombre && (
         <span class="meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          {data.info_docente.nombre}
+          {docenteNombre}
         </span>
       )}
     </div>
+
+    <div class="tags">
+      {data.categorias.map(tag => (
+        <span class={`badge badge-${getCategoryClass(tag)}`}>{tag}</span>
+      ))}
+    </div>
+
     <p class="card-description">{data.descripcion}</p>
     <a href={`/talleres/${slug}`} class="btn btn-primary full-width">Ver Taller</a>
   </div>
@@ -142,4 +167,34 @@ const { data, slug } = taller;
     width: 100%;
     text-align: center;
   }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    color: white;
+    background-color: var(--color-neutral-600);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Colores por Categoría */
+  .badge-musica { background-color: #0ea5e9; } /* Sky Blue */
+  .badge-danza { background-color: #ec4899; } /* Pink */
+  .badge-teatro { background-color: #f59e0b; color: white; } /* Amber/Gold */
+  .badge-artes-visuales { background-color: #10b981; } /* Emerald */
+  .badge-bienestar { background-color: #8b5cf6; } /* Violet */
+  
+
+
 </style>

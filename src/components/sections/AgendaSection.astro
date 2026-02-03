@@ -31,15 +31,28 @@ const formatFecha = (date: Date) => {
             <div class="card-content">
                 <div class="date-badge">{formatFecha(evento.data.fecha)}</div>
               <h3 class="card-title text-accent">{evento.data.titulo}</h3>
+              
+              <div class="event-meta">
+                {evento.data.lugar && <div class="meta-row"><span class="label">Lugar:</span> {evento.data.lugar}</div>}
+                {evento.data.precio && <div class="meta-row"><span class="label">Precio:</span> {evento.data.precio}</div>}
+                <div class={`status-badge status-${evento.data.estado.toLowerCase().replace(' ', '-')}`}>
+                  {evento.data.estado}
+                </div>
+              </div>
+
               <p>{evento.data.descripcion}</p>
               <div class="card-actions">
-                <a
-                  href={`https://wa.me/${evento.data.whatsapp_ventas || siteSettings.whatsapp}?text=Hola, quiero comprar entrada para: ${evento.data.titulo}`}
-                  class="btn-buy-ticket"
-                  target="_blank"
-                >
-                  {evento.data.texto_boton || "Comprar Entrada"}
-                </a>
+                {evento.data.estado === 'Finalizado' || evento.data.estado === 'Suspendido' ? (
+                   <span class="btn-disabled">Evento {evento.data.estado}</span>
+                ) : (
+                  <a
+                    href={`https://wa.me/${evento.data.whatsapp_ventas || siteSettings.whatsapp}?text=Hola, quiero comprar entrada para: ${evento.data.titulo}`}
+                    class="btn-buy-ticket"
+                    target="_blank"
+                  >
+                    {evento.data.texto_boton || "Comprar Entrada"}
+                  </a>
+                )}
               </div>
             </div>
           </article>
@@ -152,5 +165,57 @@ const formatFecha = (date: Date) => {
     color: #000000 !important;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     transform: translateY(-2px);
+  }
+
+  .label {
+    font-weight: bold;
+    color: var(--color-accent-400); /* Gold */
+  }
+
+  /* Nuevos estilos para metadatos */
+  .event-meta {
+    margin-bottom: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--color-neutral-300);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-top: 0.3rem;
+  }
+
+  .status-próximamente { background-color: var(--color-primary-600); color: white; }
+  .status-en-curso { background-color: #28a745; color: white; }
+  .status-finalizado { background-color: #6c757d; color: white; }
+  .status-suspendido { background-color: #dc3545; color: white; }
+
+  .btn-disabled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: not-allowed;
   }
 </style>

@@ -1,20 +1,20 @@
 ---
-titulo: "Guitarra y Bajo"
-descripcion: "Aprendé a tocar tus canciones favoritas. Acordes, punteos, acompañamiento y técnica para guitarra criolla, eléctrica y bajo."
-imagen: "../../assets/images/clases-guitarraybajo1.png"
-flyer: "../../assets/images/clases-guitarraybajo4.png"
-horarios: "Martes y Jueves 19:00"
-edadNivel: "Desde 10 años"
-info_docente:
-  nombre: "Profe de Cuerdas"
-  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
-  foto: ""
+titulo: Taller De Guitarra y Bajo
+descripcion: Aprendé a tocar tus canciones favoritas. Acordes, punteos,
+  acompañamiento y técnica para guitarra criolla, eléctrica y bajo.
+imagen: ../../assets/images/clases-guitarraybajo1.png
+flyer: ../../assets/images/clases-guitarraybajo4.png
+horarios: Martes y Jueves 19:00
+edadNivel: Desde 10 años
+categorias:
+  - Música
+galeria:
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
 activo: true
 orden: 7
-galeria:
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
+docente: profe-de-cuerdas
 ---
 
 ## Taller de Guitarra y Bajo

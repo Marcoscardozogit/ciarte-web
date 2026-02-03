@@ -28,10 +28,20 @@ const tallerNavItems = [
 
 const bgImage = taller.data.flyer?.src || taller.data.imagen?.src || defaultImage.src;
 
-// Resolver datos del docente (CMS object)
-const docenteNombre = taller.data.info_docente?.nombre;
-const docenteBio = taller.data.info_docente?.bio || "Profesional con amplia trayectoria y pasión por la enseñanza artística.";
-const docenteFoto = taller.data.info_docente?.foto;
+// Resolver datos del docente
+import { getEntry } from 'astro:content';
+let docenteNombre = taller.data.docente_nombre;
+let docenteBio = taller.data.docente_bio;
+let docenteFoto = taller.data.docente_foto;
+
+if (taller.data.docente) {
+  const docenteEntry = await getEntry(taller.data.docente);
+  if (docenteEntry) {
+    docenteNombre = docenteEntry.data.nombre;
+    docenteBio = docenteEntry.data.bio;
+    docenteFoto = docenteEntry.data.foto;
+  }
+}
 
 // Resolver WhatsApp
 import siteSettings from '../../content/settings/site.json';

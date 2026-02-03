@@ -1,23 +1,21 @@
 ---
-titulo: Teatro
+titulo: Taller De Teatro
 descripcion: Clases de teatro para todas las edades. Desarrollá tu expresión
   corporal, creatividad e improvisación en un espacio de encuentro y juego.
 imagen: ../../assets/images/clases-teatro5.png
 flyer: ../../assets/images/clases-teatro1.png
-horarios: Lunes 11:00 a 12:00
+horarios: Lunes 11:00 a 13:00
 edadNivel: Todas las edades
+categorias:
+  - Teatro
 whatsapp_custom: "3874535151"
-info_docente:
-  nombre: El Laberinto
-  bio: Profesional con amplia trayectoria y pasión por la enseñanza artística.
-  foto: ""
+docente: map-nombre-nuevo-docente-bio-docente-de-prueba
 galeria:
   - ../../assets/images/hero-bg.jpg
   - ../../assets/images/hero-bg.jpg
   - ../../assets/images/hero-bg.jpg
 activo: true
 orden: 1
-docente: El Laberinto
 ---
 ## Sobre el Taller de Teatro
 

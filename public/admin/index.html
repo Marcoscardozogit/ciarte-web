@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>CIArte CMS - Panel de Administración</title>
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-    <!-- Decap CMS App -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>CIArte CMS - Panel de Administración</title>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    /* Corregir desbordamiento del editor y previsualización */
+    div[class*="SplitPane"] {
+      max-width: 100vw !important;
+    }
+
+    div[class*="Pane2"] {
+      overflow-x: hidden !important;
+    }
+
+    /* Asegurar que el contenedor principal no genere scroll horizontal */
+    body {
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Decap CMS App -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Registrar estilos para el interior del iframe de previsualización
+    CMS.registerPreviewStyle("/admin/preview.css");
+  </script>
+</body>
+
 </html>

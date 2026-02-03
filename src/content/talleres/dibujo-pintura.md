@@ -1,20 +1,20 @@
 ---
-titulo: "Dibujo y Pintura"
-descripcion: "Explorá diferentes técnicas plásticas como acrílico, acuarela, carbonilla y más. Un espacio para liberar tu creatividad visual."
-imagen: "../../assets/images/clases-dibujoypintura6.png"
-flyer: "../../assets/images/clases-dibujoypintura7.png"
-horarios: "Martes y Jueves 18:00"
-edadNivel: "Niños y Adultos"
-info_docente:
-  nombre: "Profe de Arte"
-  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
-  foto: ""
+titulo: Taller De Dibujo y Pintura
+descripcion: Explorá diferentes técnicas plásticas como acrílico, acuarela,
+  carbonilla y más. Un espacio para liberar tu creatividad visual.
+imagen: ../../assets/images/clases-dibujoypintura6.png
+flyer: ../../assets/images/clases-dibujoypintura7.png
+horarios: Martes y Jueves 18:00
+edadNivel: Niños y Adultos
+categorias:
+  - Artes Visuales
+galeria:
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
+  - ../../assets/images/hero-bg.jpg
 activo: true
 orden: 2
-galeria:
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
-  - "../../assets/images/hero-bg.jpg"
+docente: profe-de-arte
 ---
 
 ## Taller de Artes Visuales

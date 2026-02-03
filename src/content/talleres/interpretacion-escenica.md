@@ -1,17 +1,18 @@
 ---
-titulo: "Interpretación Escénica"
-descripcion: "Taller para cantantes. Potenciá tu presencia en el escenario y conectá profundamente con tu interpretación."
-imagen: "../../assets/images/clases-interpretacionescenica1.png"
-flyer: "../../assets/images/clases-interpretacionescenica.png"
-horarios: "Consultar"
-edadNivel: "Jóvenes y Adultos"
-info_docente:
-  nombre: "Staff CIArte"
-  bio: "Profesional con amplia trayectoria y pasión por la enseñanza artística."
-  foto: ""
+titulo: Taller De Interpretación Escénica
+descripcion: Taller para cantantes. Potenciá tu presencia en el escenario y
+  conectá profundamente con tu interpretación.
+imagen: ../../assets/images/clases-interpretacionescenica1.png
+flyer: ../../assets/images/clases-interpretacionescenica.png
+horarios: Martes 15:00 a 18:00
+edadNivel: Jóvenes y Adultos
+categorias:
+  - Teatro
+  - Música
+docente: staff-ciarte
+galeria: []
 activo: true
 orden: 3
-galeria: []
 ---
 
 ## Taller de Interpretación Escénica para Cantantes

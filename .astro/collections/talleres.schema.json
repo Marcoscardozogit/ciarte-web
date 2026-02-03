@@ -22,27 +22,87 @@
         "edadNivel": {
           "type": "string"
         },
-        "info_docente": {
-          "type": "object",
-          "properties": {
-            "nombre": {
-              "type": "string"
-            },
-            "bio": {
-              "type": "string"
-            },
-            "foto": {
-              "type": "string"
-            }
+        "categorias": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Música",
+              "Danza",
+              "Teatro",
+              "Artes Visuales",
+              "Bienestar"
+            ]
           },
-          "required": [
-            "nombre",
-            "bio"
-          ],
-          "additionalProperties": false
+          "default": [
+            "Música"
+          ]
+        },
+        "docente_nombre": {
+          "type": "string"
+        },
+        "docente_bio": {
+          "type": "string"
+        },
+        "docente_foto": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
         },
         "whatsapp_custom": {
           "type": "string"
+        },
+        "docente": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "collection": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "collection"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "slug": {
+                  "type": "string"
+                },
+                "collection": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "slug",
+                "collection"
+              ],
+              "additionalProperties": false
+            }
+          ]
         },
         "activo": {
           "type": "boolean",
