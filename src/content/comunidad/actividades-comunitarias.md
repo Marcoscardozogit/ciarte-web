@@ -7,9 +7,9 @@ descripcion: Jornadas de encuentro, arte en los barrios y actividades solidarias
   que tejen redes vecinales.
 imagen: ../../assets/images/evento-comunidad6.jpg
 galeria:
-  - ../../assets/images/evento-comunidad3.jpg
+  - ../../assets/images/evento-comunidad10.jpg
   - ../../assets/images/evento-comunidad6.jpg
-  - ../../assets/images/gallery-4.jpg
+  - ../../assets/images/comunidad7.jpg
 fecha: 2024-10-10
 ---
 
