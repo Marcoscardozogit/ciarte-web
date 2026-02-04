@@ -400,8 +400,14 @@ const whatsappNumber = taller.data.whatsapp_custom || siteSettings.whatsapp;
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
     gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .gallery-item {

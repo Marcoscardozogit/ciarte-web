@@ -72,7 +72,7 @@ collections:
 
       # --- IMÁGENES Y MULTIMEDIA ---
       - { label: "Imagen Principal (Horizontal)", name: "imagen", widget: "image", required: true, hint: "Formato 16:9 (Tarjeta). Tamaño recomendado: 1200x675px" }
-      - { label: "Flyer Detalle (Vertical)", name: "flyer", widget: "image", required: true, hint: "Formato vertical. Aparece al abrir el taller. Tamaño recomendado: 800x1200px" }
+      - { label: "Flyer Detalle (Vertical)", name: "flyer", widget: "image", required: true, hint: "Formato vertical u horizontal. Aparece al abrir el taller." }
       - { label: "Galería de Fotos", name: "galeria", widget: "list", field: { label: "Foto", name: "image", widget: "image" }, required: false, hint: "Fotos de las clases o presentaciones" }
       
       # --- CONTENIDO Y SEO ---

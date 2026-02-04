@@ -35,7 +35,7 @@
     // Solución para el problema de "Reactividad" en el Local Backend
     // Forzamos una recarga o redirección al guardar para que la lista se actualice
     CMS.registerEventListener({
-      name: 'prePublish',
+      name: 'postSave',
       handler: ({ entry }) => {
         console.log("Guardado detectado, preparando actualización de lista...");
         // Pequeño truco: después de guardar, esperamos un momento y volvemos a la lista
