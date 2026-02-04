@@ -1,6 +1,6 @@
 ---
 titulo: Función Teatral
-fecha: 2026-02-06 16:00
+fecha: 2026-02-22 20:00
 estado: Suspendido
 imagen: ../../assets/images/obra1.jpg
 descripcion: Nueva obra del grupo El Laberinto. ¡No te la pierdas!
