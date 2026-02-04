@@ -1,7 +1,7 @@
 ---
 titulo: Función Teatral
 fecha: 2026-02-26 20:00
-estado: Suspendido
+estado: En Curso
 imagen: ../../assets/images/obra1.jpg
 descripcion: Nueva obra del grupo El Laberinto. ¡No te la pierdas!
 lugar: CIArte
