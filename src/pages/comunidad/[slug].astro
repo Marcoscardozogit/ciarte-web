@@ -26,7 +26,7 @@ const comunidadNavItems = [
 const bgImage = actividad.data.imagen?.src || defaultImage.src;
 ---
 
-<Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} image={bgImage} navItems={comunidadNavItems}>
+<Layout title={`${actividad.data.titulo} | CIArte`} description={actividad.data.descripcion} image={bgImage} navItems={comunidadNavItems} headerSolid={true}>
   <article class="comunidad-detail">
     <header class="comunidad-header">
       <div class="header-bg" style={`background-image: url(${bgImage})`}></div>
@@ -207,5 +207,18 @@ const bgImage = actividad.data.imagen?.src || defaultImage.src;
 
   .gallery-item:hover img {
     transform: scale(1.05);
+  }
+
+  /* Móviles (especialmente 360x740) */
+  @media (max-width: 640px) {
+    .comunidad-header {
+      padding-top: 140px;
+      padding-bottom: 40px;
+    }
+
+    .comunidad-title {
+      font-size: var(--font-size-2xl);
+      padding: 0 var(--space-4);
+    }
   }
 </style>

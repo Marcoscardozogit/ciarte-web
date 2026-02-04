@@ -4,6 +4,7 @@ interface Props {
   description?: string;
   image?: string;
   navItems?: { label: string; href: string }[];
+  headerSolid?: boolean;
 }
 
 import '../styles/global.css';
@@ -14,7 +15,7 @@ import siteSettings from '../content/settings/site.json';
 import { ViewTransitions } from 'astro:transitions';
 import defaultImage from '../assets/images/perfiluno.jpg';
 
-const { title, description = "CIArte - Espacio de arte comunitario en General Güemes, coordinación El Laberinto Grupo de Teatro.", navItems } = Astro.props;
+const { title, description = "CIArte - Espacio de arte comunitario en General Güemes, coordinación El Laberinto Grupo de Teatro.", navItems, headerSolid = false } = Astro.props;
 
 // Meta tags imagenes
 const image = defaultImage.src;
@@ -132,7 +133,7 @@ const image = defaultImage.src;
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <Header navItems={navItems} />
+    <Header navItems={navItems} isSolid={headerSolid} />
     <slot />
     <Footer />
     <Lightbox />

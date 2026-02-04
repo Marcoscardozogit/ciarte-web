@@ -11,10 +11,15 @@ const defaultNavItems = [
   { label: 'Contacto', href: '/#contacto' },
 ];
 
-const { navItems = defaultNavItems } = Astro.props;
+interface Props {
+  navItems?: { label: string; href: string }[];
+  isSolid?: boolean;
+}
+
+const { navItems = defaultNavItems, isSolid = false } = Astro.props;
 ---
 
-<header class="site-header">
+<header class={`site-header ${isSolid ? 'is-solid' : ''}`}>
   <div class="container header-container">
     <div class="logo">
       <a href="/">
@@ -113,6 +118,11 @@ const { navItems = defaultNavItems } = Astro.props;
     background: transparent; /* Completely transparent at top */
     border-bottom: 1px solid transparent;
     transition: all var(--transition-normal);
+  }
+
+  .site-header.is-solid {
+    background: var(--color-neutral-900);
+    border-bottom-color: var(--color-primary-900);
   }
 
   .site-header.scrolled {

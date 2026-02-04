@@ -49,7 +49,7 @@ const whatsappNumber = taller.data.whatsapp_custom || siteSettings.whatsapp;
 
 ---
 
-<Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.meta_description || taller.data.descripcion} image={bgImage} navItems={tallerNavItems}>
+<Layout title={`${taller.data.titulo} | CIArte`} description={taller.data.meta_description || taller.data.descripcion} image={bgImage} navItems={tallerNavItems} headerSolid={true}>
   <article class="taller-detail">
     <header class="taller-header">
       <div class="container header-content">
@@ -559,6 +559,23 @@ const whatsappNumber = taller.data.whatsapp_custom || siteSettings.whatsapp;
 
     .gallery-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Móviles (especialmente 360x740) */
+  @media (max-width: 640px) {
+    .taller-header {
+      padding-top: 140px;
+      padding-bottom: 40px;
+    }
+
+    .taller-title {
+      font-size: var(--font-size-3xl);
+      padding: 0 var(--space-4);
+    }
+
+    .header-bg {
+      background-position: center center;
     }
   }
 </style>
