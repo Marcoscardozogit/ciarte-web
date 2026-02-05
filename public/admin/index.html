@@ -9,18 +9,73 @@
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
-    /* Corregir desbordamiento del editor y previsualización */
-    div[class*="SplitPane"] {
-      max-width: 100vw !important;
-    }
-
-    div[class*="Pane2"] {
-      overflow-x: hidden !important;
-    }
-
-    /* Asegurar que el contenedor principal no genere scroll horizontal */
-    body {
+    /* Reset global para evitar scroll horizontal fantasma */
+    body,
+    html {
+      max-width: 100vw;
       overflow-x: hidden;
+    }
+
+    /* =========================================
+       DISEÑO MÓVIL (Max 800px)
+       Objetivo: Sidebar arriba, Contenido abajo
+       ========================================= */
+    @media (max-width: 800px) {
+
+      /* 1. Contenedor Principal: Cambiar de Row a Column */
+      div[class*="AppMainContainer"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* 2. Barra Lateral (Colecciones): Pegada arriba y ancho completo */
+      div[class*="SidebarContainer"],
+      aside {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+        display: block !important;
+        border-right: none !important;
+        border-bottom: 1px solid #444;
+        padding: 10px !important;
+        flex-shrink: 0 !important;
+      }
+
+      div[class*="SidebarLink"] {
+        padding-left: 0 !important;
+      }
+
+      /* 3. Área de Contenido: Abajo y ancho completo */
+      div[class*="CollectionMainContainer"],
+      main {
+        width: 100% !important;
+        min-width: 100% !important;
+        margin-left: 0 !important;
+        padding: 5px !important;
+        display: block !important;
+      }
+
+      div[class*="CollectionPageHeader"] {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+      }
+
+      div[class*="CardGrid"] {
+        margin-left: 0 !important;
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+
+      a[class*="Card"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+      }
     }
   </style>
 </head>
