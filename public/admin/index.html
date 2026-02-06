@@ -76,6 +76,22 @@
         max-width: 100% !important;
         margin: 0 !important;
       }
+
+      /* =========================================
+         VISTA DE EDICIÓN (Crear/Editar)
+         Objetivo: Ocultar previsualización
+         ========================================= */
+
+      /* Ocultar el panel de previsualización (Pane2) */
+      div[class*="Pane2"] {
+        display: none !important;
+      }
+
+      /* Hacer que el panel del formulario (Pane1) use todo el ancho */
+      div[class*="Pane1"] {
+        width: 100% !important;
+        min-width: 100% !important;
+      }
     }
   </style>
 </head>
