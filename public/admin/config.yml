@@ -20,7 +20,7 @@ collections:
   # ===== 1. AGENDA CULTURAL (PRIORIDAD ALTA: EVENTOS PRÓXIMOS) =====
   - name: "agenda"
     label: "Agenda Cultural"
-    label_singular: "Evento"
+    label_singular: "Agenda"
     folder: "src/content/agenda"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"

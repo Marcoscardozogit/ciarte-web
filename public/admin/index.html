@@ -17,10 +17,35 @@
     }
 
     /* =========================================
-       DISEÑO MÓVIL (Max 800px)
-       Objetivo: Sidebar arriba, Contenido abajo
-       ========================================= */
+         AJUSTES DE TEXTO PERSONALIZADOS
+         ========================================= */
+
+    /* En PC: Cambiar "Nuevo Agenda" por "Nueva Agenda" (Corrección de género) */
+    a[href*="agenda/new"] {
+      font-size: 0 !important;
+    }
+
+    /* Ocultamos cualquier elemento hijo (como el span original del CMS) */
+    a[href*="agenda/new"] * {
+      display: none !important;
+    }
+
+    a[href*="agenda/new"]::after {
+      content: "Nueva Agenda";
+      font-size: 14px !important;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* =========================================
+         DISEÑO MÓVIL (Max 800px)
+         ========================================= */
     @media (max-width: 800px) {
+
+      /* En móviles: Cambiar a "Nuevas Agendas" como pidió el usuario */
+      a[href*="agenda/new"]::after {
+        content: "Nuevas Agendas" !important;
+      }
 
       /* 1. Contenedor Principal: Cambiar de Row a Column */
       div[class*="AppMainContainer"] {
